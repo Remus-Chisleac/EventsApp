@@ -11,8 +11,8 @@ namespace EventsApp
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    // Add BAHNSCHRIFT.TTF to the fonts collection
+                    fonts.AddFont("BAHNSCHRIFT.TTF", "Bahnschrift");
                 });
 
 #if DEBUG
