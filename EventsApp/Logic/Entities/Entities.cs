@@ -10,12 +10,12 @@ namespace EventsApp.Logic.Entities
     [System.Serializable]
     public struct UserInfo
     {
-        [PrimaryKey("userID")] public string GUID;
-        [PrimaryKey("name")] public string name;
+        [PrimaryKey("userID")] public Guid GUID;
+        public string name;
         public string email;
         public string password;
 
-        public UserInfo(string guid, string name, string email, string password)
+        public UserInfo(Guid guid, string name, string email, string password)
         {
             GUID = guid;
             this.name = name;
@@ -25,28 +25,31 @@ namespace EventsApp.Logic.Entities
 
         public UserInfo(string name, string email, string password)
         {
-            GUID = Guid.NewGuid().ToString();
+            GUID = Guid.NewGuid();
             this.name = name;
             this.email = email;
             this.password = password;
         }
     }
 
+    [System.Serializable]
     public struct EventInfo
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
-        public string Location { get; set; }
-        public string Organizer { get; set; }
+        [PrimaryKey("eventID")] public Guid GUID;
+        public string name;
+        public string description;
+        public DateTime date;
+        public string location;
+        public Guid organizer;
 
-        public EventInfo(string name, string description, DateTime date, string location, string organizer)
+        public EventInfo(string name, string description, DateTime date, string location, Guid organizer)
         {
-            Name = name;
-            Description = description;
-            Date = date;
-            Location = location;
-            Organizer = organizer;
+            GUID = Guid.NewGuid();
+            this.name = name;
+            this.description = description;
+            this.date = date;
+            this.location = location;
+            this.organizer = organizer;
         }
     }
 }

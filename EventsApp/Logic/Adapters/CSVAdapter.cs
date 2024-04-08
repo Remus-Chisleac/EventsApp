@@ -128,7 +128,14 @@ namespace EventsApp.Logic.Adapters
 
                             for (int i = 0; i < fields.Length && i < values.Length; i++)
                             {
-                                fields[i].SetValueDirect(reference, Convert.ChangeType(values[i], fields[i].FieldType));
+                                if (fields[i].FieldType == typeof(Guid))
+                                {
+                                    fields[i].SetValueDirect(reference, Guid.Parse(values[i]));
+                                }
+                                else
+                                {
+                                    fields[i].SetValueDirect(reference, Convert.ChangeType(values[i], fields[i].FieldType));
+                                }
                             }
 
                             data.Add(instance);
