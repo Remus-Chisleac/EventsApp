@@ -11,7 +11,7 @@
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count = count + 2;
+            count = count + 3;
 
             if (count == 1)
                 CounterBtn.Text = $"Clicked {count} time";
