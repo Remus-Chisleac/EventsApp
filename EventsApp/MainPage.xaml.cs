@@ -16,6 +16,7 @@ namespace EventsApp
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
+            Cox.Text = "Bruh";
             TestUsers();
             TestEvents();
             count = count + 2;
