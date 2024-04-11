@@ -22,7 +22,7 @@ namespace EventsApp
             count = count + 2;
 
             if (count == 1)
-                CounterBtn.Text = $"Clicked {count} timeeeee";
+                CounterBtn.Text = $"Clicked {count} timeeeeexxxxxx";
             else
                 CounterBtn.Text = $"Clicked {count} times for VITeam";
 
