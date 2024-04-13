@@ -27,16 +27,21 @@ namespace EventsApp.Logic.Managers
             DataBaseAdapter<AdminInfo> adminsAdapter = new DataBaseAdapter<AdminInfo>("AdminsDB");
             DataBaseAdapter<UserEventRelationInfo> userEventRelationsAdapter = new DataBaseAdapter<UserEventRelationInfo>("UserEventRelationsDB");
 
-
             usersAdapter.Connect();
             eventsAdapter.Connect();
             reportsAdapter.Connect();
             reviewsAdapter.Connect();
+            adminsAdapter.Connect();
+            userEventRelationsAdapter.Connect();
 
             UsersManager.Initialize(usersAdapter, adminsAdapter, userEventRelationsAdapter);
-            EventsManager.Initialize(eventsAdapter);
+            EventsManager.Initialize(eventsAdapter, userEventRelationsAdapter);
             ReportsManager.Initialize(reportsAdapter);
             ReviewsManager.Initialize(reviewsAdapter);
+        }
+
+        public static void GenerateLocalDatabase()
+        {
         }
     }
 }

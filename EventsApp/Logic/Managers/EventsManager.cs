@@ -1,36 +1,29 @@
-﻿using AndroidX.Annotations;
-using EventsApp.Logic.Adapters;
-using EventsApp.Logic.Attributes;
+﻿using EventsApp.Logic.Adapters;
 using EventsApp.Logic.Entities;
 using EventsApp.Logic.Extensions;
-using Java.Sql;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventsApp.Logic.Managers
 {
     public static class EventsManager
     {
-        private static DataAdapter<EventInfo> _adapter;
+        private static DataAdapter<EventInfo> _eventsAdapter;
+        private static DataAdapter<UserEventRelationInfo> _userEventRelationsAdapter;
 
-        public static void Initialize(DataAdapter<EventInfo> adapter)
+        public static void Initialize(DataAdapter<EventInfo> adapter, DataAdapter<UserEventRelationInfo> userEventRelationsAdapter)
         {
-            _adapter = adapter;
+            _eventsAdapter = adapter;
+            _userEventRelationsAdapter = userEventRelationsAdapter;
         }
 
         public static EventInfo GetEvent(Guid eventId)
         {
             EventInfo eventInfo = new EventInfo(eventId);
-            return _adapter.Get(eventInfo.GetIdentifier());
+            return _eventsAdapter.Get(eventInfo.GetIdentifier());
         }
 
         public static List<EventInfo> GetAllEvents()
         {
-            return _adapter.GetAll();
+            return _eventsAdapter.GetAll();
         }
 
         /// <summary>

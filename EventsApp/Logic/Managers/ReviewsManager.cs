@@ -38,20 +38,45 @@ namespace EventsApp.Logic.Managers
 
         public static List<ReviewInfo> GetAllReviewsOfReviewer(Guid reviewer)
         {
-            // TODO: ReviewsManager: Implement this method
-            return null;
+            List<ReviewInfo> reviews = new List<ReviewInfo>();
+
+            foreach (ReviewInfo review in _adapter.GetAll())
+            {
+                if (review.userGUID == reviewer)
+                {
+                    reviews.Add(review);
+                }
+            }
+
+            return reviews;
         }
 
         public static List<ReviewInfo> GetAllReviewsOfEvent(Guid eventId)
         {
-            // TODO: ReviewsManager: Implement this method
-            return null;
+            List<ReviewInfo> reviews = new List<ReviewInfo>();
+
+            foreach (ReviewInfo review in _adapter.GetAll())
+            {
+                if (review.eventGUID == eventId)
+                {
+                    reviews.Add(review);
+                }
+            }
+
+            return reviews;
         }
 
         public static List<ReviewInfo> GetAllReviewsOfUser(Guid userId)
         {
-            // TODO: ReviewsManager: Implement this method
-            return null;
+            List<EventInfo> eventsOfUser = EventsManager.GetEventsOfUser(userId);
+            List<ReviewInfo> reviews = new List<ReviewInfo>();
+
+            foreach (EventInfo eventInfo in eventsOfUser)
+            {
+                reviews.AddRange(GetAllReviewsOfEvent(eventInfo.GUID));
+            }
+
+            return reviews;
         }
 
         /// <summary>
