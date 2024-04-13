@@ -67,6 +67,12 @@ namespace EventsApp.Logic.Managers
             // not implemented by us
         }
 
+        public static void AddNewUser(string name, string password)
+        {
+            UserInfo userInfo = new UserInfo(name, password);
+            _usersAdapter.Add(userInfo);
+        }
+
         public static void InviteUser(Guid userId, Guid eventId, Guid userInvitedId)
         {
             SendNotificationToUser(userInvitedId, $"You have been invited to the event {EventsManager.GetEvent(eventId).eventName}! by {GetUser(userId).name}");

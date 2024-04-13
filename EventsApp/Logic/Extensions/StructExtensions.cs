@@ -19,7 +19,8 @@ namespace EventsApp.Logic.Extensions
 
                 if (primaryKeyAttribute != null)
                 {
-                    primaryKeys.Add(primaryKeyAttribute.Key, field.GetValue(obj));
+                    string fieldName = field.Name;
+                    primaryKeys.Add(fieldName, field.GetValue(obj));
                 }
             }
 
@@ -39,7 +40,8 @@ namespace EventsApp.Logic.Extensions
 
                 if (primaryKeyAttribute != null)
                 {
-                    primaryKeys.Add(primaryKeyAttribute.Key, field.GetValue(obj));
+                    string fieldName = field.Name;
+                    primaryKeys.Add(fieldName, field.GetValue(obj));
                 }
             }
 

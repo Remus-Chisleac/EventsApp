@@ -12,13 +12,20 @@ namespace EventsApp.Logic.Entities
     {
         public const float MIN_SCORE = 4.0f;
 
-        [PrimaryKey("userID")] public Guid GUID;
+        [PrimaryKey] public Guid GUID;
         public string name;
         public string password;
 
         public UserInfo(Guid guid, string name, string password)
         {
             GUID = guid;
+            this.name = name;
+            this.password = password;
+        }
+
+        public UserInfo(string name, string password)
+        {
+            GUID = Guid.NewGuid();
             this.name = name;
             this.password = password;
         }
@@ -41,7 +48,7 @@ namespace EventsApp.Logic.Entities
     [Table("Events"), System.Serializable]
     public struct EventInfo
     {
-        [PrimaryKey("eventID")] public Guid GUID;
+        [PrimaryKey] public Guid GUID;
         public Guid organizerGUID;
         public string eventName;
         public string categories; // "music, sports, etc."
@@ -93,8 +100,8 @@ namespace EventsApp.Logic.Entities
     [Table("UsersEventsStatus"), System.Serializable]
     public struct UserEventRelationInfo
     {
-        [PrimaryKey("userID")] public Guid userGUID;
-        [PrimaryKey("eventID")] public Guid eventGUID;
+        [PrimaryKey] public Guid userGUID;
+        [PrimaryKey] public Guid eventGUID;
         public enum Status
         {
             Going,
@@ -120,8 +127,8 @@ namespace EventsApp.Logic.Entities
     [Table("Reports"), System.Serializable]
     public struct ReportInfo
     {
-        [PrimaryKey("userID")] public Guid userGUID;
-        [PrimaryKey("eventID")] public Guid eventGUID;
+        [PrimaryKey] public Guid userGUID;
+        [PrimaryKey] public Guid eventGUID;
         public enum ReportType
         {
             Harassment,
@@ -155,8 +162,8 @@ namespace EventsApp.Logic.Entities
     [Table("Reviews"), System.Serializable]
     public struct ReviewInfo
     {
-        [PrimaryKey("userID")] public Guid userGUID;
-        [PrimaryKey("eventID")] public Guid eventGUID;
+        [PrimaryKey] public Guid userGUID;
+        [PrimaryKey] public Guid eventGUID;
         public float score;
         public string reviewDescription;
 
@@ -180,7 +187,7 @@ namespace EventsApp.Logic.Entities
     [Table("Expenses"), System.Serializable]
     public struct ExpenseInfo
     {
-        [PrimaryKey("expenseID")] public Guid GUID;
+        [PrimaryKey] public Guid GUID;
         public Guid eventGUID;
         public string expenseName;
         public float cost;
@@ -197,7 +204,7 @@ namespace EventsApp.Logic.Entities
     [Table("Donations"), System.Serializable]
     public struct DonationInfo
     {
-        [PrimaryKey("donationID")] public Guid GUID;
+        [PrimaryKey] public Guid GUID;
         public Guid eventGUID;
         public Guid userGUID;
         public float amount;
@@ -230,7 +237,7 @@ namespace EventsApp.Logic.Entities
     [Table("Admins"), System.Serializable]
     public struct AdminInfo
     {
-        [PrimaryKey("adminID")] public Guid GUID;
+        [PrimaryKey] public Guid GUID;
 
         public AdminInfo(Guid guid)
         {

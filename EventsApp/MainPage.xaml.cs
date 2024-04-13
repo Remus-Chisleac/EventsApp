@@ -7,8 +7,6 @@ namespace EventsApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
@@ -16,13 +14,13 @@ namespace EventsApp
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            Cox.Text = "Bruh";
-            count = count + 2;
+            UsersManager.AddNewUser("Imre", "ziggy");
+            List<UserInfo> allUsers = UsersManager.GetAllUsers();
+            UserInfo test = UsersManager.GetUser(allUsers[0].GUID);
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} timeeeeexxxxxx";
-            else
-                CounterBtn.Text = $"Clicked {count} times for VITeam";
+            Cox.Text = "Bruh";
+
+            CounterBtn.Text = $"{test.name} {test.password}";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }

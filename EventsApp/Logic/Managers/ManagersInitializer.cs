@@ -5,11 +5,14 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Reflection;
 using EventsApp.Logic.Attributes;
+using EventsApp.Logic.Extensions;
 
 namespace EventsApp.Logic.Managers
 {
     public static class ManagersInitializer
-    { 
+    {
+        public static string connectionString;
+
         public static void Initialize()
         {
             // Setting up connections
@@ -17,14 +20,14 @@ namespace EventsApp.Logic.Managers
             //CSVAdapter<Entities.EventInfo> eventsCSVAdapter = new CSVAdapter<Entities.EventInfo>("EventsCSV");
             //usersCSVAdapter.Connect();
             //eventsCSVAdapter.Connect();
-            GenerateLocalDatabase();
+            GenerateLocalDatabase(true);
 
-            DataBaseAdapter<UserInfo> usersAdapter = new DataBaseAdapter<UserInfo>("UsersDB");
-            DataBaseAdapter<Entities.EventInfo> eventsAdapter = new DataBaseAdapter<Entities.EventInfo>("EventsDB");
-            DataBaseAdapter<ReportInfo> reportsAdapter = new DataBaseAdapter<ReportInfo>("ReportsDB");
-            DataBaseAdapter<ReviewInfo> reviewsAdapter = new DataBaseAdapter<ReviewInfo>("ReviewsDB");
-            DataBaseAdapter<AdminInfo> adminsAdapter = new DataBaseAdapter<AdminInfo>("AdminsDB");
-            DataBaseAdapter<UserEventRelationInfo> userEventRelationsAdapter = new DataBaseAdapter<UserEventRelationInfo>("UserEventRelationsDB");
+            DataBaseAdapter<UserInfo> usersAdapter = new DataBaseAdapter<UserInfo>(connectionString);
+            DataBaseAdapter<Entities.EventInfo> eventsAdapter = new DataBaseAdapter<Entities.EventInfo>(connectionString);
+            DataBaseAdapter<ReportInfo> reportsAdapter = new DataBaseAdapter<ReportInfo>(connectionString);
+            DataBaseAdapter<ReviewInfo> reviewsAdapter = new DataBaseAdapter<ReviewInfo>(connectionString);
+            DataBaseAdapter<AdminInfo> adminsAdapter = new DataBaseAdapter<AdminInfo>(connectionString);
+            DataBaseAdapter<UserEventRelationInfo> userEventRelationsAdapter = new DataBaseAdapter<UserEventRelationInfo>(connectionString);
 
             usersAdapter.Connect();
             eventsAdapter.Connect();
@@ -39,7 +42,7 @@ namespace EventsApp.Logic.Managers
             ReviewsManager.Initialize(reviewsAdapter);
         }
 
-        public static void GenerateLocalDatabase()
+        public static void GenerateLocalDatabase(bool wipeExisting = false)
         {
             string dbPath = AppDataInfo.ValidatePath("EventsDB.mdf");
             string logPath = AppDataInfo.ValidatePath("EventsDB.ldf");
@@ -50,7 +53,9 @@ namespace EventsApp.Logic.Managers
             builder.InitialCatalog = "master";
             builder.IntegratedSecurity = false; // Use Windows Authentication
             builder.TrustServerCertificate = true; // Trust the server certificate
-            string connectionString = builder.ConnectionString;
+            connectionString = builder.ConnectionString;
+
+            if(!wipeExisting) return;
 
             // SQL command to create the database
             string dropDatabaseQuery = "DROP DATABASE IF EXISTS EventsDB";
@@ -88,6 +93,7 @@ namespace EventsApp.Logic.Managers
                 }
             }
 
+            // ------------------- Create tables -------------------
             string namespaceName = "EventsApp.Logic.Entities";
 
             var assembly = Assembly.GetExecutingAssembly();
@@ -100,6 +106,23 @@ namespace EventsApp.Logic.Managers
             foreach (var structType in structsInNamespace)
             {
                 string tableName = structType.GetCustomAttribute<TableAttribute>().TableName;
+                // Drop table if exists
+                string dropTableQuery = $"DROP TABLE IF EXISTS {tableName}";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(dropTableQuery, connection);
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
                 List<string> columns = new List<string>();
 
                 // Get only structs with no consts or enums
@@ -109,13 +132,43 @@ namespace EventsApp.Logic.Managers
                     string columnName = field.Name;
                     string columnType = GetFieldType(field.FieldType);
 
-                    string column = $"{columnName} {columnType} {(primaryKey ? "PRIMARY KEY" : "")}";
+                    string column = $"{columnName} {columnType}";
+
                     columns.Add(column);
                 }
 
-                string createTableQuery = $"CREATE TABLE {tableName} ({string.Join(", ", columns)})";
+                // Add primery keys
+                string primaryKeyString = "PRIMARY KEY (";
+                foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    if (field.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                    {
+                        primaryKeyString += field.Name + ", ";
+                    }
+                }
+                primaryKeyString = primaryKeyString.Remove(primaryKeyString.Length - 2) + ")";
 
+                columns.Add(primaryKeyString);
+
+                string createTableQuery = $"CREATE TABLE {tableName} ({string.Join(", ", columns)})";
+                
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(createTableQuery, connection);
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
             }
+
+            
         }
 
         private static string GetFieldType(Type fieldType)
