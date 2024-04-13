@@ -72,13 +72,20 @@ namespace EventsApp.Logic.Managers
             // If something is null ignore that filter
             // Ex: If name is "" ignore the name filter
 
-            return new List<EventInfo>();
+            List<EventInfo> filteredEvents = new List<EventInfo>();
+            if (filter.name != null)
+            {
+               filteredEvents = allEvents.FindAll(c => c.eventName.ToLower().Contains(filter.name.ToLower()));
+            }
+
+            return filteredEvents;
         }
 
         public static List<UserInfo> GetInterestedUsers(Guid eventId)
         {
             // TODO: UsersManager: Implement this method
-            return null;
+            EventInfo eventInfo = GetEvent(eventId);
+            return new List<UserInfo>();
         }
 
         public static List<UserInfo> GetGoingUsers(Guid eventId)
@@ -101,7 +108,7 @@ namespace EventsApp.Logic.Managers
             return 0;
         }
 
-        public static List<EventInfo> getEventsOfUser(Guid userId)
+        public static List<EventInfo> GetEventsOfUser(Guid userId)
         {
             return new List<EventInfo>();
         }
@@ -113,6 +120,15 @@ namespace EventsApp.Logic.Managers
             public DateTime startDate;
             public DateTime endDate;
             public List<string> categories;
+
+            public EventFilter(string name, float maxFee, DateTime startDate, DateTime endDate, List<string> categories)
+            {
+                this.name = name;
+                this.maxFee = maxFee;
+                this.startDate = startDate;
+                this.endDate = endDate;
+                this.categories = categories;
+            }
         }
     }
 }
