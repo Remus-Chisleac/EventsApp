@@ -94,7 +94,7 @@ namespace EventsApp.Logic.Managers
             var types = assembly.GetTypes();
 
             var structsInNamespace = types
-                .Where(t => t.IsValueType && t.IsValueType && t.Namespace == namespaceName && t.IsValueType)
+                .Where(t => t.Namespace == namespaceName && t.IsValueType && !t.IsEnum)
                 .ToList();
 
             foreach (var structType in structsInNamespace)
@@ -102,7 +102,8 @@ namespace EventsApp.Logic.Managers
                 string tableName = structType.GetCustomAttribute<TableAttribute>().TableName;
                 List<string> columns = new List<string>();
 
-                foreach (var field in structType.GetFields())
+                // Get only structs with no consts or enums
+                foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
                 {
                     bool primaryKey = field.GetCustomAttribute<PrimaryKeyAttribute>() != null;  
                     string columnName = field.Name;
@@ -130,6 +131,10 @@ namespace EventsApp.Logic.Managers
             else if (fieldType == typeof(DateTime))
             {
                 return "DATETIME";
+            }
+            else if (fieldType == typeof(float))
+            {
+                return "FLOAT";
             }
             else if (fieldType == typeof(bool))
             {
