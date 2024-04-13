@@ -67,6 +67,18 @@ namespace EventsApp.Logic.Managers
             return new List<EventInfo>();
         }
 
+        public static List<UserInfo> GetInterestedUsers(Guid eventId)
+        {
+            // TODO: UsersManager: Implement this method
+            return null;
+        }
+
+        public static List<UserInfo> GetGoingUsers(Guid eventId)
+        {
+            // TODO: UsersManager: Implement this method
+            return null;
+        }
+
         public static int GetNumberOfParticipants(Guid eventId)
         {
             // TODO: EventsManager: Implement this method

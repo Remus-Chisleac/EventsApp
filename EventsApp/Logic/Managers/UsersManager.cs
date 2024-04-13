@@ -5,6 +5,8 @@ using EventsApp.Logic.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,16 +48,50 @@ namespace EventsApp.Logic.Managers
             return 0;
         }
 
-        public static List<UserInfo> GetInterestedUsers(Guid eventId)
+        public static List<UserInfo> SearchUsersByUsername(string usernameString)
         {
-            // TODO: UsersManager: Implement this method
-            return null;
+            List<UserInfo> foundUsers = new List<UserInfo>();
+            foreach (UserInfo user in _usersAdapter.GetAll())
+            {
+                if (user.name.StartsWith(usernameString))
+                {
+                    foundUsers.Add(user);
+                }
+            }
+            return foundUsers;
         }
 
-        public static List<UserInfo> GetGoingUsers(Guid eventId)
+
+        public static void SendNotificationToUser(Guid userInvitedId, string message)
         {
-            // TODO: UsersManager: Implement this method
-            return null;
+            // not implemented by us
         }
+
+        public static void InviteUser(Guid userId, Guid eventId, Guid userInvitedId)
+        {
+            SendNotificationToUser(userInvitedId, $"You have been invited to the event {EventsManager.GetEvent(eventId).eventName}! by {GetUser(userId).name}");
+        }
+
+        public static void SetInterestedStatus(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Interested);
+            _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
+        }
+
+        public static void RemoveStatus(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
+            _userEventRelationsAdapter.Delete(userEventRelationInfo.GetIdentifier());
+        }
+
+        public static void SetGoingStatus(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Going);
+            _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
+        }
+
+
+
+
     }
 }

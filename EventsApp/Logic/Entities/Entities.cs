@@ -108,6 +108,13 @@ namespace EventsApp.Logic.Entities
             this.eventGUID = eventGUID;
             this.status = status;
         }
+
+        public UserEventRelationInfo(Guid userGUID, Guid eventGUID)
+        {
+            this.userGUID = userGUID;
+            this.eventGUID = eventGUID;
+            status = Status.Interested;
+        }
     }
 
     [Table("Reports"), System.Serializable]
