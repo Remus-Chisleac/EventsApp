@@ -24,13 +24,16 @@ namespace EventsApp.Logic.Managers
             DataBaseAdapter<Entities.EventInfo> eventsAdapter = new DataBaseAdapter<Entities.EventInfo>("EventsDB");
             DataBaseAdapter<ReportInfo> reportsAdapter = new DataBaseAdapter<ReportInfo>("ReportsDB");
             DataBaseAdapter<ReviewInfo> reviewsAdapter = new DataBaseAdapter<ReviewInfo>("ReviewsDB");
+            DataBaseAdapter<AdminInfo> adminsAdapter = new DataBaseAdapter<AdminInfo>("AdminsDB");
+            DataBaseAdapter<UserEventRelationInfo> userEventRelationsAdapter = new DataBaseAdapter<UserEventRelationInfo>("UserEventRelationsDB");
+
 
             usersAdapter.Connect();
             eventsAdapter.Connect();
             reportsAdapter.Connect();
             reviewsAdapter.Connect();
 
-            UsersManager.Initialize(usersAdapter);
+            UsersManager.Initialize(usersAdapter, adminsAdapter, userEventRelationsAdapter);
             EventsManager.Initialize(eventsAdapter);
             ReportsManager.Initialize(reportsAdapter);
             ReviewsManager.Initialize(reviewsAdapter);
