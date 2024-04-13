@@ -79,15 +79,17 @@ namespace EventsApp.Logic.Managers
             return reviews;
         }
 
-        /// <summary>
-        /// Mean value of all reviews of a user
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static float GetScoreOfUser(Guid userId)
+    
+        public static float GetReviewsAverageScoreOfUser(Guid userId)
         {
-            // TODO: ReviewsManager: Implement this method
-            return 0;
+            List<ReviewInfo> userReviews = GetAllReviewsOfUser(userId);
+            float averageScore = 0;
+            foreach (ReviewInfo review in userReviews)
+            {
+                averageScore += review.score;
+            }
+            averageScore /= userReviews.Count;
+            return averageScore;
         }
     }
 }
