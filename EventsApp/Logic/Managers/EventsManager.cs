@@ -40,7 +40,12 @@ namespace EventsApp.Logic.Managers
         /// <returns></returns>
         public static bool IsEventActive(Guid eventId)
         {
-            // TODO: EventsManager: Implement this method
+            EventInfo eventInfo = GetEvent(eventId);
+            DateTime startDate = eventInfo.startDate;
+            DateTime endDate = eventInfo.endDate;
+            DateTime today = DateTime.Now;
+            if (today >= startDate && today <= endDate)
+                return true;
             return false;
         }
 
@@ -51,8 +56,11 @@ namespace EventsApp.Logic.Managers
         /// <returns></returns>
         public static bool IsEventOver(Guid eventId)
         {
-            // TODO: EventsManager: Implement this method
-
+            EventInfo eventInfo = GetEvent(eventId);
+            DateTime endDate = eventInfo.endDate;
+            DateTime today = DateTime.Now;
+            if(today >  endDate) 
+                return true;
             return false;
         }
 
@@ -91,6 +99,11 @@ namespace EventsApp.Logic.Managers
             // TODO: EventsManager: Implement this method
 
             return 0;
+        }
+
+        public static List<EventInfo> getEventsOfUser(Guid userId)
+        {
+            return new List<EventInfo>();
         }
 
         public struct EventFilter
