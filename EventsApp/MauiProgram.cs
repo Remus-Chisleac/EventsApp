@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using EventsApp.Logic.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace EventsApp
 {
@@ -18,7 +19,7 @@ namespace EventsApp
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            ManagersInitializer.Initialize();
             return builder.Build();
         }
     }

@@ -100,4 +100,10 @@
 	  <Folder Include="Storage\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="EventInfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
