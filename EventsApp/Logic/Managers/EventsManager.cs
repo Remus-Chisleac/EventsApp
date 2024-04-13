@@ -59,7 +59,6 @@ namespace EventsApp.Logic.Managers
 
         public static List<EventInfo> FilterEvents(EventFilter filter)
         {
-            // TODO: EventsManager: Implement this method
 
             List<EventInfo> allEvents = GetAllEvents();
             // If something is null ignore that filter
@@ -76,34 +75,58 @@ namespace EventsApp.Logic.Managers
 
         public static List<UserInfo> GetInterestedUsers(Guid eventId)
         {
-            // TODO: UsersManager: Implement this method
             EventInfo eventInfo = GetEvent(eventId);
-            return new List<UserInfo>();
+            List<UserEventRelationInfo> userEventRelationInfos = _userEventRelationsAdapter.GetAll();
+            List<UserInfo> users = new List<UserInfo>();
+            foreach(UserEventRelationInfo relationInfo in userEventRelationInfos)
+            {
+                if(relationInfo.eventGUID == eventId && relationInfo.status == UserEventRelationInfo.Status.Interested)
+                {
+                    UserInfo user = UsersManager.GetUser(relationInfo.userGUID);
+                    users.Add(user);
+                }
+            }
+            return users;
         }
 
-        public static List<UserInfo> GetGoingUsers(Guid eventId)
+        public static List<Entities.UserInfo> GetGoingUsers(Guid eventId)
         {
-            // TODO: UsersManager: Implement this method
-            return null;
+            EventInfo eventInfo = GetEvent(eventId);
+            List<UserEventRelationInfo> userEventRelationInfos = _userEventRelationsAdapter.GetAll();
+            List<UserInfo> users = new List<UserInfo>();
+            foreach (UserEventRelationInfo relationInfo in userEventRelationInfos)
+            {
+                if (relationInfo.eventGUID == eventId && relationInfo.status == UserEventRelationInfo.Status.Going)
+                {
+                    UserInfo user = UsersManager.GetUser(relationInfo.userGUID);
+                    users.Add(user);
+                }
+            }
+            return users;
         }
 
         public static int GetNumberOfParticipants(Guid eventId)
         {
-            // TODO: EventsManager: Implement this method
-
-            return 0;
+            return GetGoingUsers(eventId).Count;
         }
     
         public static float GetTotalDonationAmount(Guid eventId)
         {
-            // TODO: EventsManager: Implement this method
-
-            return 0;
+            float totalDonationAmount = 0;
+            List<DonationInfo> donations =  DonationsManager.GetAllDonationsForEvent(eventId);
+            foreach (DonationInfo donation in donations)
+                totalDonationAmount += donation.amount;
+            return totalDonationAmount;
         }
 
         public static List<EventInfo> GetEventsOfUser(Guid userId)
         {
-            return new List<EventInfo>();
+            List<EventInfo> events = GetAllEvents();
+            List<EventInfo> eventsForUser = new List<EventInfo>();
+            foreach(EventInfo eventInfo in events)
+                if(eventInfo.organizerGUID == userId)
+                    eventsForUser.Add(eventInfo);
+            return eventsForUser;
         }
 
         public struct EventFilter
