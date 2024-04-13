@@ -57,10 +57,48 @@ namespace EventsApp.Logic.Managers
         }
 
 
-        public static void AddReport(Guid reportId, Guid eventId, ReportInfo.ReportType reportType)
+        public static void AddReport(Guid userId, Guid eventId, ReportInfo.ReportType reportType)
         {
-            // TODO: ReportsManager: Implement this method
-            ReportInfo reportInfo = new ReportInfo(reportId, eventId, reportType);
+            ReportInfo reportInfo = new ReportInfo(userId, eventId, reportType);
+            _adapter.Add(reportInfo);
+        }
+
+        public static void RemoveReport(Guid userId, Guid eventId)
+        {
+            ReportInfo reportInfo = new ReportInfo(userId, eventId);
+            _adapter.Delete(reportInfo.GetIdentifier());
+        }
+
+        public static void RemoveAllReportsForEvent(Guid eventId)
+        {
+            foreach (ReportInfo report in GetReportsForEvent(eventId))
+            {
+                _adapter.Delete(report.GetIdentifier());
+            }
+        }
+
+        public static void RemoveAllReportsFromUser(Guid userId)
+        {
+            foreach (ReportInfo report in GetReportsFromUser(userId))
+            {
+                _adapter.Delete(report.GetIdentifier());
+            }
+        }
+
+        public static void RemoveAllReports()
+        {
+            _adapter.Clear();
+        }
+
+        public static void RemoveAllReportsForEventAndUser(Guid userId, Guid eventId)
+        {
+            foreach (ReportInfo report in GetAllReports())
+            {
+                if (report.userGUID == userId && report.eventGUID == eventId)
+                {
+                    _adapter.Delete(report.GetIdentifier());
+                }
+            }
         }
     }
 }

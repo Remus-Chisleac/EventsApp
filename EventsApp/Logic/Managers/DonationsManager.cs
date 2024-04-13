@@ -42,10 +42,47 @@ namespace EventsApp.Logic.Managers
             return donationsForEvent;
         }
 
-        public static void AddDonation(Guid userId, Guid eventId, float amountOfMoney)
+        public static void AddDonation(Guid userId, Guid eventId, float amount)
         {
-            DonationInfo donationInfo = new DonationInfo(userId, eventId, amountOfMoney);
+            DonationInfo donationInfo = new DonationInfo(userId, eventId, amount);
             _adapter.Add(donationInfo);
+        }
+
+        public static float GetTotalDonationsForEvent(Guid eventId)
+        {
+            float totalDonations = 0;
+            foreach (DonationInfo donation in GetAllDonationsForEvent(eventId))
+            {
+                totalDonations += donation.amount;
+            }
+            return totalDonations;
+        }
+
+        public static List<DonationInfo> GetDonationsFromUser(Guid userId)
+        {
+            List<DonationInfo> donationsFromUser = new List<DonationInfo>();
+            foreach (DonationInfo donation in GetAllDonations())
+            {
+                if (donation.userGUID == userId)
+                {
+                    donationsFromUser.Add(donation);
+                }
+            }
+            return donationsFromUser;
+        }
+
+        public static void RemoveDonation(Guid donationId)
+        {
+            DonationInfo donationInfo = new DonationInfo(donationId);
+            _adapter.Delete(donationInfo.GetIdentifier());
+        }
+
+        public static void RemoveAllDonationsForEvent(Guid eventId)
+        {
+            foreach (DonationInfo donation in GetAllDonationsForEvent(eventId))
+            {
+                _adapter.Delete(donation.GetIdentifier());
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventsApp.Logic.Entities
 {
-    [Table("Reviews"), System.Serializable]
+    [Table("Users"), System.Serializable]
     public struct UserInfo
     {
         public const float MIN_SCORE = 4.0f;
@@ -16,7 +16,7 @@ namespace EventsApp.Logic.Entities
         public string name;
         public string password;
 
-        public UserInfo(Guid guid, string name, string password, float reviewScore, int numberOfReviews)
+        public UserInfo(Guid guid, string name, string password)
         {
             GUID = guid;
             this.name = name;

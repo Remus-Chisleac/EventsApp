@@ -51,7 +51,7 @@ namespace EventsApp.Logic.Managers
         public static List<UserInfo> SearchUsersByUsername(string usernameString)
         {
             List<UserInfo> foundUsers = new List<UserInfo>();
-            foreach (UserInfo user in _usersAdapter.GetAll())
+            foreach (UserInfo user in GetAllUsers())
             {
                 if (user.name.StartsWith(usernameString))
                 {
