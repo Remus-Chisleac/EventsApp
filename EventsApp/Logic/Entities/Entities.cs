@@ -209,10 +209,18 @@ namespace EventsApp.Logic.Entities
             this.amount = amount;
         }
 
-        public DonationInfo(Guid guid, Guid eventGUID)
+        public DonationInfo(Guid eventGUID, Guid userGUID, float amount)
+        {
+            this.eventGUID = eventGUID;
+            this.userGUID = userGUID;
+            this.amount = amount;
+            GUID = Guid.NewGuid();
+        }
+
+        public DonationInfo(Guid guid)
         {
             GUID = guid;
-            this.eventGUID = eventGUID;
+            eventGUID = Guid.Empty;
             userGUID = Guid.Empty;
             amount = 0;
         }

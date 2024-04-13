@@ -78,11 +78,6 @@ namespace EventsApp.Logic.Managers
             _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
         }
 
-        public static void RemoveStatus(Guid userId, Guid eventId)
-        {
-            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
-            _userEventRelationsAdapter.Delete(userEventRelationInfo.GetIdentifier());
-        }
 
         public static void SetGoingStatus(Guid userId, Guid eventId)
         {
@@ -90,6 +85,11 @@ namespace EventsApp.Logic.Managers
             _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
         }
 
+        public static void RemoveStatus(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
+            _userEventRelationsAdapter.Delete(userEventRelationInfo.GetIdentifier());
+        }
 
 
 
