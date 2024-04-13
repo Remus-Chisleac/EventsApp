@@ -19,28 +19,43 @@ namespace EventsApp.Logic.Managers
             _adapter = adapter;
         }
 
-        public static ReportInfo GetReport(Guid reportId, Guid eventId)
+        public static List<ReportInfo> GetAllReports()
         {
-            ReportInfo reportInfo = new ReportInfo(reportId, eventId);
+            return _adapter.GetAll();
+        }
+
+        public static ReportInfo GetReport(Guid userId, Guid eventId)
+        {
+            ReportInfo reportInfo = new ReportInfo(userId, eventId);
             return _adapter.Get(reportInfo.GetIdentifier());
         }
 
         public static List<ReportInfo> GetReportsFromUser(Guid userId)
         {
-            // TODO: ReportsManager: Implement this method
-            return null;
+            List<ReportInfo> reportInfos = new List<ReportInfo>();
+            foreach (ReportInfo report in GetAllReports())
+            {
+                if (report.userGUID == userId)
+                {
+                    reportInfos.Add(report);
+                }
+            }
+            return reportInfos;
         }
 
         public static List<ReportInfo> GetReportsForEvent(Guid eventId)
         {
-            // TODO: ReportsManager: Implement this method
-            return null;
+            List<ReportInfo> reportInfos = new List<ReportInfo>();
+            foreach (ReportInfo report in GetAllReports())
+            {
+                if (report.eventGUID == eventId)
+                {
+                    reportInfos.Add(report);
+                }
+            }
+            return reportInfos;
         }
 
-        public static List<ReportInfo> GetAllReports()
-        {
-            return _adapter.GetAll();
-        }
 
         public static void AddReport(Guid reportId, Guid eventId, ReportInfo.ReportType reportType)
         {
