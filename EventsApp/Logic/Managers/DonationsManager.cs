@@ -18,15 +18,34 @@ namespace EventsApp.Logic.Managers
             _adapter = adapter;
         }
 
-        public static DonationInfo GetDonation(Guid donationId, Guid eventId)
+        public static DonationInfo GetDonation(Guid donationId)
         {
-            DonationInfo donationInfo = new DonationInfo(donationId, eventId);
+            DonationInfo donationInfo = new DonationInfo(donationId);
             return _adapter.Get(donationInfo.GetIdentifier());
         }
 
         public static List<DonationInfo> GetAllDonations()
         {
             return _adapter.GetAll();
+        }
+
+        public static List<DonationInfo> GetAllDonationsForEvent(Guid eventId)
+        {
+            List<DonationInfo> donationsForEvent = new List<DonationInfo>();
+            foreach (DonationInfo donation in GetAllDonations())
+            {
+                if (donation.eventGUID == eventId)
+                {
+                    donationsForEvent.Add(donation);
+                }
+            }
+            return donationsForEvent;
+        }
+
+        public static void AddDonation(Guid userId, Guid eventId, float amountOfMoney)
+        {
+            DonationInfo donationInfo = new DonationInfo(userId, eventId, amountOfMoney);
+            _adapter.Add(donationInfo);
         }
     }
 }

@@ -149,6 +149,7 @@ namespace EventsApp.Logic.Entities
             this.eventGUID = eventGUID;
             reportType = ReportType.Harassment;
         }
+
     }
 
     [Table("Reviews"), System.Serializable]
