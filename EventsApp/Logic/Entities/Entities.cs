@@ -216,6 +216,14 @@ namespace EventsApp.Logic.Entities
             this.amount = amount;
             GUID = Guid.NewGuid();
         }
+
+        public DonationInfo(Guid guid)
+        {
+            GUID = guid;
+            eventGUID = Guid.Empty;
+            userGUID = Guid.Empty;
+            amount = 0;
+        }
     }
 
     [Table("Admins"), System.Serializable]
