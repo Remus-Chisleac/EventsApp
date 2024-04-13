@@ -36,7 +36,7 @@ namespace EventsApp.Logic.Entities
     public struct EventInfo
     {
         [PrimaryKey("eventID")] public Guid GUID;
-        public string name;
+        [PrimaryKey("name")] public string name;
         public string description;
         public DateTime date;
         public string location;
