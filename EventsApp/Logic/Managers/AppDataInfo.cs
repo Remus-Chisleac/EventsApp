@@ -11,6 +11,7 @@ namespace EventsApp.Logic.Managers
         public const string AppFolder = "EventsApp";
         public const string UsersCSV = "UsersCSV.csv";
         public const string EventsCSV = "EventsCSV.csv";
+        public const string DataBase = "Events.mdf";
         public static string PersistentDataPath => FileSystem.Current.AppDataDirectory;
 
         public static string ValidatePath(string path)

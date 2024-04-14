@@ -64,7 +64,7 @@ namespace EventsApp.Logic.Adapters
         {
             List<T> items = GetAll();
             T item = Get(id);
-
+            
             // Iterate and check their identifiers
             int index = -1;
 

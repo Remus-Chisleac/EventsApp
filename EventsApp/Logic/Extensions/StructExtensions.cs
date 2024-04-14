@@ -19,7 +19,8 @@ namespace EventsApp.Logic.Extensions
 
                 if (primaryKeyAttribute != null)
                 {
-                    primaryKeys.Add(primaryKeyAttribute.Key, field.GetValue(obj));
+                    string fieldName = field.Name;
+                    primaryKeys.Add(fieldName, field.GetValue(obj));
                 }
             }
 
@@ -39,11 +40,24 @@ namespace EventsApp.Logic.Extensions
 
                 if (primaryKeyAttribute != null)
                 {
-                    primaryKeys.Add(primaryKeyAttribute.Key, field.GetValue(obj));
+                    string fieldName = field.Name;
+                    primaryKeys.Add(fieldName, field.GetValue(obj));
                 }
             }
 
             return new Identifier(primaryKeys);
+        }
+
+        public static string GetTableName(this ValueType obj)
+        {
+            var tableProp = obj.GetType().GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
+            return (tableProp as TableAttribute)?.TableName;
+        }
+
+        public static string GetTableName<T>(this T obj) where T : struct
+        {
+            var tableProp = obj.GetType().GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
+            return (tableProp as TableAttribute)?.TableName;
         }
     }
 }
