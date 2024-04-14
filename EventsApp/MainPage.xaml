@@ -17,7 +17,7 @@
                 HorizontalOptions="Fill"
                 VerticalOptions="Start"
                 Padding="30,0"/>
-
+            
             <VerticalStackLayout
                 x:Name="EventsList"
                 Grid.Row="1"
@@ -28,6 +28,16 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Padding="10" BackgroundColor="DarkSlateBlue" Margin="5">
+                                    <Shell.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="0.2*,0.8*">
+                                                <Label Grid.Column="1"
+                                               Text="imre"
+                                               FontAttributes="Italic"
+                                               VerticalTextAlignment="Center" />        
+                                            </Grid>
+                                        </DataTemplate>
+                                    </Shell.ItemTemplate>
                                     <!-- Organizer Name -->
                                     <Button Text="Edit" Clicked="OnEventEditClicked" CommandParameter="{Binding EventGUID}" />
                                     <Label Text="{Binding OrganizerName}" FontSize="Title" FontAttributes="Bold" />
@@ -75,6 +85,7 @@
                 </ListView>
 
             </VerticalStackLayout>
+           
         </Grid>
     </ScrollView>
 
