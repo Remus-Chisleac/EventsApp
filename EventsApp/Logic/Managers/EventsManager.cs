@@ -69,6 +69,27 @@ namespace EventsApp.Logic.Managers
             {
                filteredEvents = allEvents.FindAll(c => c.eventName.ToLower().Contains(filter.name.ToLower()));
             }
+            if (filter.maxFee != 0)
+            {
+                filteredEvents = filteredEvents.FindAll(e => e.entryFee <= filter.maxFee);
+            }
+            if (filter.startDate != null)
+            {
+                filteredEvents = filteredEvents.FindAll(e => e.startDate >= filter.startDate);
+            }
+            if (filter.categories != null)
+            {
+                filteredEvents = filteredEvents.FindAll(e =>
+                {
+                    List<string> presentCategories = e.categories.Split(',').ToList();
+                    foreach(string category in filter.categories)
+                    {
+                        if (presentCategories.Contains(category))
+                            return true;
+                    }
+                    return false;
+                });
+            }
 
             return filteredEvents;
         }
@@ -89,7 +110,7 @@ namespace EventsApp.Logic.Managers
             return users;
         }
 
-        public static List<Entities.UserInfo> GetGoingUsers(Guid eventId)
+        public static List<UserInfo> GetGoingUsers(Guid eventId)
         {
             EventInfo eventInfo = GetEvent(eventId);
             List<UserEventRelationInfo> userEventRelationInfos = _userEventRelationsAdapter.GetAll();
@@ -127,6 +148,48 @@ namespace EventsApp.Logic.Managers
                 if(eventInfo.organizerGUID == userId)
                     eventsForUser.Add(eventInfo);
             return eventsForUser;
+        }
+
+        public static List<EventInfo> sortEventsByPopularityAscending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => GetNumberOfParticipants(firstEvent.GUID).CompareTo(GetNumberOfParticipants(secondEvent.GUID)));
+            return events;
+        }
+
+        public static List<EventInfo> sortEventsByPopularityDescending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => GetNumberOfParticipants(secondEvent.GUID).CompareTo(GetNumberOfParticipants(firstEvent.GUID)));
+            return events;
+        }
+
+        public static List<EventInfo> sortEventsByDateAscending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => firstEvent.startDate.CompareTo(secondEvent.startDate));
+            return events;
+        }
+
+        public static List<EventInfo> sortEventsByDateDescending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => secondEvent.startDate.CompareTo(firstEvent.startDate));
+            return events;
+        }
+
+        public static List<EventInfo> sortEventsByPriceAscending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => firstEvent.entryFee.CompareTo(secondEvent.entryFee));
+            return events;
+        }
+
+        public static List<EventInfo> sortEventsByPriceDescending()
+        {
+            List<EventInfo> events = GetAllEvents();
+            events.Sort((firstEvent, secondEvent) => secondEvent.entryFee.CompareTo(firstEvent.entryFee));
+            return events;
         }
 
         public struct EventFilter
