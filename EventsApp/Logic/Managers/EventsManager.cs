@@ -1,6 +1,7 @@
 ﻿using EventsApp.Logic.Adapters;
 using EventsApp.Logic.Entities;
 using EventsApp.Logic.Extensions;
+using System.Diagnostics;
 
 namespace EventsApp.Logic.Managers
 {
@@ -45,6 +46,18 @@ namespace EventsApp.Logic.Managers
         public static void AddNewEvent(EventInfo eventInfo)
         {
             _eventsAdapter.Add(eventInfo);
+        }
+
+        public static void UpdateEvent(Guid eventId, EventInfo eventInfo)
+        {
+            EventInfo currentEvent = GetEvent(eventId);
+            _eventsAdapter.Update(currentEvent.GetIdentifier(), eventInfo);
+        }
+
+        public static void DeleteEvent(Guid eventId)
+        {
+            EventInfo eventInfo = GetEvent(eventId);
+            _eventsAdapter.Delete(eventInfo.GetIdentifier());
         }
 
         /// <summary>
@@ -131,6 +144,12 @@ namespace EventsApp.Logic.Managers
             return users;
         }
 
+        public static UserInfo GetEventOrganizer(Guid eventId)
+        {
+            EventInfo eventInfo = GetEvent(eventId);
+            return UsersManager.GetUser(eventInfo.organizerGUID);
+        }
+
         public static int GetNumberOfParticipants(Guid eventId)
         {
             return GetGoingUsers(eventId).Count;
@@ -155,42 +174,42 @@ namespace EventsApp.Logic.Managers
             return eventsForUser;
         }
 
-        public static List<EventInfo> sortEventsByPopularityAscending()
+        public static List<EventInfo> SortEventsByPopularityAscending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => GetNumberOfParticipants(firstEvent.GUID).CompareTo(GetNumberOfParticipants(secondEvent.GUID)));
             return events;
         }
 
-        public static List<EventInfo> sortEventsByPopularityDescending()
+        public static List<EventInfo> SortEventsByPopularityDescending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => GetNumberOfParticipants(secondEvent.GUID).CompareTo(GetNumberOfParticipants(firstEvent.GUID)));
             return events;
         }
 
-        public static List<EventInfo> sortEventsByDateAscending()
+        public static List<EventInfo> SortEventsByDateAscending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => firstEvent.startDate.CompareTo(secondEvent.startDate));
             return events;
         }
 
-        public static List<EventInfo> sortEventsByDateDescending()
+        public static List<EventInfo> SortEventsByDateDescending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => secondEvent.startDate.CompareTo(firstEvent.startDate));
             return events;
         }
 
-        public static List<EventInfo> sortEventsByPriceAscending()
+        public static List<EventInfo> SortEventsByPriceAscending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => firstEvent.entryFee.CompareTo(secondEvent.entryFee));
             return events;
         }
 
-        public static List<EventInfo> sortEventsByPriceDescending()
+        public static List<EventInfo> SortEventsByPriceDescending()
         {
             List<EventInfo> events = GetAllEvents();
             events.Sort((firstEvent, secondEvent) => secondEvent.entryFee.CompareTo(firstEvent.entryFee));
@@ -214,5 +233,46 @@ namespace EventsApp.Logic.Managers
                 this.categories = categories;
             }
         }
+
+        public static List<EventInfo> SearchEventByName(string nameString)
+        {
+            List<EventInfo> allEvents = GetAllEvents();
+            List<EventInfo> filteredEvents = new List<EventInfo>();
+            filteredEvents = allEvents.FindAll(eventItem => eventItem.eventName.ToLower().Contains(nameString.ToLower()));
+            return filteredEvents;
+        }
+
+        public static List<EventInfo> SearchEventByLocation(string locationString)
+        {
+            List<EventInfo> allEvents = GetAllEvents();
+            List<EventInfo> filteredEvents = new List<EventInfo>();
+            filteredEvents = allEvents.FindAll(eventItem => eventItem.location.ToLower().Contains(locationString.ToLower()));
+            return filteredEvents;
+        }
+
+        private static bool ProcessPayment(string cardHolderName, string cardNumber, string cvv, DateTime expirationDate)
+        {
+            string correctCardHolderName = cardHolderName; // get this from database
+            string correctCardNumber = cardNumber; // get this from database
+            string correctCvv = cvv; // get this from database
+            DateTime correctExpirationDate = expirationDate; // get this from database
+
+            if (correctExpirationDate.Date < DateTime.Now.Date || correctCardHolderName != cardHolderName || correctCardNumber != cardNumber || correctCvv != cvv || correctExpirationDate.Date != expirationDate.Date)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static void BuyTicket(Guid eventId, Guid userId, string cardHolderName, string cardNumber, string cvv, DateTime expirationDate)
+        {
+            if (ProcessPayment(cardHolderName, cardNumber, cvv, expirationDate))
+            {
+                UserEventRelationInfo relationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Going);
+                _userEventRelationsAdapter.Add(relationInfo);
+            }
+        }
+
     }
 }
