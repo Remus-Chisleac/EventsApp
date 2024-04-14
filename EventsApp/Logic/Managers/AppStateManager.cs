@@ -9,5 +9,7 @@ namespace EventsApp.Logic.Managers
     public static class AppStateManager
     {
         public static Guid currentUserGUID = Guid.Parse("00000000-0000-0000-0000-000000000000");
+        public static string name = "Janina Gigel";
+        public static string password = "1234";
     }
 }

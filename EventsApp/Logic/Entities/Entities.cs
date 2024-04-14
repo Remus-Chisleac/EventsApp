@@ -78,7 +78,24 @@ namespace EventsApp.Logic.Entities
             this.ageLimit = ageLimit;
             this.entryFee = entryFee;
         }
-    
+
+        public EventInfo(Guid userGUID, string eventName, string categories, string location, int maxParticipants, string description, DateTime startDate, DateTime endDate, string bannerURL, string logoURL, int ageLimit, float entryFee)
+        {
+            GUID = Guid.NewGuid();
+            this.organizerGUID = userGUID;
+            this.eventName = eventName;
+            this.categories = categories;
+            this.location = location;
+            this.maxParticipants = maxParticipants;
+            this.description = description;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.bannerURL = bannerURL;
+            this.logoURL = logoURL;
+            this.ageLimit = ageLimit;
+            this.entryFee = entryFee;
+        }
+
         public EventInfo(Guid guid)
         {
             GUID = guid;

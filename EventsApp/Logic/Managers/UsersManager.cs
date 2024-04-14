@@ -67,6 +67,11 @@ namespace EventsApp.Logic.Managers
             // not implemented by us
         }
 
+        public static void AddNewUser(UserInfo user)
+        {
+            _usersAdapter.Add(user);
+        }
+
         public static void AddNewUser(string name, string password)
         {
             UserInfo userInfo = new UserInfo(name, password);

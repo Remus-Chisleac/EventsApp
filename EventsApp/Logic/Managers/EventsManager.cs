@@ -42,6 +42,11 @@ namespace EventsApp.Logic.Managers
             return false;
         }
 
+        public static void AddNewEvent(EventInfo eventInfo)
+        {
+            _eventsAdapter.Add(eventInfo);
+        }
+
         /// <summary>
         /// Returns true if the current date is after the endDate of the event
         /// </summary>

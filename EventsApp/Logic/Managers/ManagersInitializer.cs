@@ -40,6 +40,8 @@ namespace EventsApp.Logic.Managers
             EventsManager.Initialize(eventsAdapter, userEventRelationsAdapter);
             ReportsManager.Initialize(reportsAdapter);
             ReviewsManager.Initialize(reviewsAdapter);
+
+            Dummy.Populate();
         }
 
         public static void GenerateLocalDatabase(bool wipeExisting = false)
