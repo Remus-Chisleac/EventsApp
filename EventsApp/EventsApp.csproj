@@ -100,4 +100,28 @@
 	  <Folder Include="Storage\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="EventPageOrganizerSponsor.xaml.cs">
+	    <DependentUpon>EventPageOrganizerSponsor.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="EventPageUser.xaml.cs">
+	    <DependentUpon>EventPageUser.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="BuyTicketAndDonatePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="EventPageOrganizerSponsor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="EventPageUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ReviewsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
