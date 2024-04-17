@@ -1,123 +1,171 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EventsApp.MainPage">
+             x:Class="EventsApp.MainPage"
+             xmlns:local="clr-namespace:EventsApp" Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="#3A86FF">
+    
+    <!--navbar-->
+    <Shell.TitleView>
+        <Grid  RowDefinitions="*" ColumnDefinitions="5*,1*">
+            <Label Grid.Row="0" Grid.Column="0" Text="Events" HorizontalOptions="End" 
+                   VerticalOptions="CenterAndExpand" Margin="0,0,100,0"  FontSize="30" 
+                   FontAttributes="Bold" TextColor="White"/>
+            <ImageButton Grid.Row="0" Grid.Column="1" Source="plus_white.svg" 
+                         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                         HeightRequest="25" WidthRequest="25" Clicked="OnImageButtonClicked"/>
+        </Grid>
+    </Shell.TitleView>
 
     <ScrollView>
+        <StackLayout>
+            <SearchBar x:Name="EventsSearchBar" TextChanged="OnSearchBarTextChanged" Placeholder="Search Events by Name" FontSize="20"/>
+            <ListView x:Name="SearchResultsListView" IsVisible="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <!--Sort Picker-->
+                <Picker  x:Name="EventsSort" Grid.Column="0" Title="Sort" FontSize="20" FontAttributes="Bold" TextColor="Black" 
+                         Background="White" HorizontalOptions="Center"  Margin="10,0,0,0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>By Popularity</x:String>
+                            <x:String>By Date</x:String>
+                            <x:String>By Price</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Grid Grid.Column="2">
+                    <!-- Filter button -->
+                    <Button x:Name="FilterButton" Text="Filter" Clicked="OnFilterClicked" BackgroundColor="White" 
+                            TextColor="Black" FontSize="20" FontAttributes="Bold"/>
 
-            <Label
-     Text="Hello, World!!!"
-     Style="{StaticResource Headline}"
-     SemanticProperties.HeadingLevel="Level1" />
-            <Label
-Text="Hello, World!!!"
-Style="{StaticResource Headline}"
-SemanticProperties.HeadingLevel="Level1" />
+                    <!-- Filter options -->
+                    <Grid>
+                        <StackLayout x:Name="FilterOptions" IsVisible="False" BackgroundColor="White" HorizontalOptions="CenterAndExpand">
+                            <StackLayout.Shadow>
+                                <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                            </StackLayout.Shadow>
 
-            <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-            <Label
-                x:Name="Cox"
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
 
-            <Button
-                Clicked="OnLoadEventsClicked"
-                Text="Load Events"
-                Grid.Row="0"
-                HorizontalOptions="Fill"
-                VerticalOptions="Start"
-                Padding="30,0"/>
-            
-            <VerticalStackLayout
-                x:Name="EventsList"
-                Grid.Row="1"
-                Padding="10,0">
+                                <Label Grid.Row="0"  Grid.ColumnSpan="4" Text="Filter" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="20"/>
 
-                <ListView x:Name="eventsListView">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Padding="10" BackgroundColor="DarkSlateBlue" Margin="5">
-                                    <Shell.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid ColumnDefinitions="0.2*,0.8*">
-                                                <Label Grid.Column="1"
-                                               Text="imre"
-                                               FontAttributes="Italic"
-                                               VerticalTextAlignment="Center" />        
-                                            </Grid>
-                                        </DataTemplate>
-                                    </Shell.ItemTemplate>
-                                    <!-- Organizer Name -->
-                                    <Button Text="Edit" Clicked="OnEventEditClicked" CommandParameter="{Binding EventGUID}" />
-                                    <Label Text="{Binding OrganizerName}" FontSize="Title" FontAttributes="Bold" />
+                                <!-- Location filter with search bar -->
+                                <Label Grid.Row="1" Grid.Column="0" Text="Location" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0" FontSize="14"/>
+                                <SearchBar x:Name="LocationFilter" Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="3" Placeholder="Search location" HorizontalOptions="StartAndExpand" />
 
-                                    <!-- Title -->
-                                    <Label Text="{Binding Title}" FontSize="Medium" />
+                                <!-- Price filter with slider  -->
+                                <Label Grid.Row="2" Grid.Column="0" Text="Price" HorizontalOptions="CenterAndExpand" Margin="0,15,0,20" FontSize="16" HorizontalTextAlignment="Center"/>
+                                <FlexLayout Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="3" AlignItems="Start" Direction="Row" HorizontalOptions="Center" Margin="0,17,0,0">
+                                    <Label Text="0" Margin="5,0,0,0"/>
+                                    <Slider x:Name="PriceFilter" Minimum="0" Maximum="500" Value="0" WidthRequest="115"/>
+                                    <Label Text="500"/>
+                                </FlexLayout>
 
-                                    <!-- Categories -->
-                                    <Label Text="{Binding Categories}" FontSize="Small" />
+                                <!-- Date filter -->
+                                <Label Grid.Row="4" Text="Date" Grid.Column="0" HorizontalOptions="CenterAndExpand" FontSize="16" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
+                                <DatePicker x:Name="DateFilter" Grid.Row="4" Grid.Column="1"  Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" Margin="0,0,0,20"/>
 
-                                    <!-- Location -->
-                                    <Label Text="{Binding Location}" FontSize="Small" />
+                                <!-- Category filter with picker -->
+                                <Picker x:Name="CategoryFilter" Grid.Row="3" Grid.Column="0"  Grid.ColumnSpan="4" Title="Category" FontSize="16" TextColor="Black">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Academic</x:String>
+                                            <x:String>Auction</x:String>
+                                            <x:String>Concert</x:String>
+                                            <x:String>Conference</x:String>
+                                            <x:String>Expo</x:String>
+                                            <x:String>Fair</x:String>
+                                            <x:String>Festival</x:String>
+                                            <x:String>Performing Art</x:String>
+                                            <x:String>Politics</x:String>
+                                            <x:String>Workshop</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
 
-                                    <!-- Start and End Date -->
-                                    <StackLayout Orientation="Horizontal" Spacing="5">
-                                        <Label Text="Start Date:" FontSize="Small" />
-                                        <Label Text="{Binding StartDate}" FontSize="Small" />
-                                        <Label Text="End Date:" FontSize="Small" />
-                                        <Label Text="{Binding EndDate}" FontSize="Small" />
-                                    </StackLayout>
+            <ListView x:Name="EventsListView" Margin="10,20,10,0" ItemsSource="{Binding Events}" RowHeight="120">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                                    <!-- Description -->
-                                    <Label Text="{Binding Description}" FontSize="Small" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEventClicked" CommandParameter="{Binding GUID}"/>
+                                </Grid.GestureRecognizers>
+                                
+                                <!--Event Logo Image-->
+                                <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Source="{Binding Picture}" Aspect="AspectFill"/>
 
-                                    <!-- Max Participants and Age Limit -->
-                                    <StackLayout Orientation="Horizontal" Spacing="5">
-                                        <Label Text="Max Participants:" FontSize="Small" />
-                                        <Label Text="{Binding MaxParticipants}" FontSize="Small" />
-                                        <Label Text="Age Limit:" FontSize="Small" />
-                                        <Label Text="{Binding AgeLimit}" FontSize="Small" />
-                                    </StackLayout>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Name}" Margin="10,0,0,0" FontAttributes="Bold" FontSize="17"/>
+                                <Label Text="Organized By:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0" FontSize="14" TextColor="#646668"/>
+                                <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding Organizer}" TextColor="#646668" FontAttributes="Bold" FontSize="15" HorizontalOptions="Start"/>
+                                <Image Source="calendar.svg" Grid.Row="2" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>
 
-                                    <!-- Entry Fee -->
-                                    <Label Text="{Binding EntryFee, StringFormat='Entry Fee: {0:C}'}" FontSize="Small" />
+                                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding Date}" FontSize="14"/>
+                                <Image Source="location.svg" Grid.Row="3" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>
+                                <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding Location}" FontSize="14"/>
+                                <Image Source="checkedbox.svg" Grid.Row="4" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>
+                                <Label Grid.Row="4" Grid.Column="2" Text="{Binding NoOfParticipants}" HorizontalOptions="CenterAndExpand" FontSize="15" Margin="0,0,15,0"/>
+                                <Label Grid.Row="4" Grid.Column="3" Text="going" HorizontalOptions="Start"/>
+                                <Image Source="ticket.svg" Grid.Row="4" Grid.Column="4" Aspect="AspectFit" Margin="0,1,0,1"/>
+                                <Label Grid.Row="4" Grid.Column="5" Text="{Binding Price}" HorizontalOptions="StartAndExpand" />
+                                <Image Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Source="{Binding StarIcon}" Aspect="AspectFit">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnStarTapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
 
-                                    <!-- Banner Image -->
-                                    <Image Source="{Binding BannerURL}" HeightRequest="100" Aspect="AspectFill" />
-
-                                    <!-- Logo Image -->
-                                    <Image Source="{Binding LogoURL}" HeightRequest="50" Aspect="AspectFit"  />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </VerticalStackLayout>
-           
-        </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ScrollView>
-
 </ContentPage>
