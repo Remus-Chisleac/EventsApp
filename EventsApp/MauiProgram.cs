@@ -19,7 +19,7 @@ namespace EventsApp
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            //ManagersInitializer.Initialize(); <------ Comentezi linia asta
+            ManagersInitializer.Initialize();
             return builder.Build();
         }
     }

@@ -44,56 +44,62 @@ namespace EventsApp.Logic.Managers
             Dummy.Populate();
         }
 
-        public static void GenerateLocalDatabase(bool wipeExisting = false)
+        public static void GenerateLocalDatabase(bool wipeExisting = false, bool azure = true)
         {
-            string dbPath = AppDataInfo.ValidatePath("EventsDB.mdf");
-            string logPath = AppDataInfo.ValidatePath("EventsDB.ldf");
-
-            // Construct the connection string
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(localdb)\\MSSQLLocalDB"; // or specify your SQL Server instance
-            builder.InitialCatalog = "master";
-            builder.IntegratedSecurity = false; // Use Windows Authentication
-            builder.TrustServerCertificate = true; // Trust the server certificate
-            connectionString = builder.ConnectionString;
-
-            if(!wipeExisting) return;
-
-            // SQL command to create the database
-            string dropDatabaseQuery = "DROP DATABASE IF EXISTS EventsDB";
-            string createDatabaseQuery = $"CREATE DATABASE EventsDB ON PRIMARY (NAME = EventsDB, FILENAME = '{dbPath}')";
-
-            // Drop the database if it already exists
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (!azure)
             {
-                SqlCommand command = new SqlCommand(dropDatabaseQuery, connection);
-                try
+                string dbPath = AppDataInfo.ValidatePath("EventsDB.mdf");
+                string logPath = AppDataInfo.ValidatePath("EventsDB.ldf");
+
+                // Construct the connection string
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "(localdb)\\MSSQLLocalDB"; // or specify your SQL Server instance
+                builder.InitialCatalog = "master";
+                builder.IntegratedSecurity = false; // Use Windows Authentication
+                builder.TrustServerCertificate = true; // Trust the server certificate
+                connectionString = builder.ConnectionString;
+
+                // Azure connection string
+                if (!wipeExisting) return;
+
+                // SQL command to create the database
+                string dropDatabaseQuery = "DROP DATABASE IF EXISTS EventsDB";
+                string createDatabaseQuery = $"CREATE DATABASE EventsDB ON PRIMARY (NAME = EventsDB, FILENAME = '{dbPath}')";
+
+                // Drop the database if it already exists
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    SqlCommand command = new SqlCommand(dropDatabaseQuery, connection);
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
-                catch (Exception ex)
+
+                // Create connection and command objects
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    Console.WriteLine(ex.Message);
+                    SqlCommand command = new SqlCommand(createDatabaseQuery, connection);
+                    try
+                    {
+                        // Open the connection and execute the command
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Already exists
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
 
-            // Create connection and command objects
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(createDatabaseQuery, connection);
-                try
-                {
-                    // Open the connection and execute the command
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    // Already exists
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            connectionString = AppDataInfo.AzureConnectionString;
 
             // ------------------- Create tables -------------------
             string namespaceName = "EventsApp.Logic.Entities";

@@ -1,12 +1,21 @@
+using EventsApp.Logic.Managers;
+using EventsApp.Model_View.Entities;
+
 namespace EventsApp;
 
 public partial class EventPageUser : ContentPage
 {
     private int countClickedInterestedImageButton = 0;
+    string eventGuid;
+    public Event Event { get; set; }
 
-    public EventPageUser()
+    public EventPageUser(string guid)
 	{
-		InitializeComponent();
+        InitializeComponent();
+
+        eventGuid = guid;
+        Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)), false, "star_empty.png");
+        BindingContext = this;
 	}
 
     private void InterestedImageButton_Clicked(object sender, EventArgs e)
@@ -20,7 +29,6 @@ public partial class EventPageUser : ContentPage
         {
             interestedImageButton.BackgroundColor = Colors.White;
         }
-
     }
 
     private void BuyTicketButton_Clicked(object sender, EventArgs e)

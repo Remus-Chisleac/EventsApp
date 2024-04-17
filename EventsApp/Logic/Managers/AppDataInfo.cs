@@ -13,6 +13,9 @@ namespace EventsApp.Logic.Managers
         public const string EventsCSV = "EventsCSV.csv";
         public const string DataBase = "Events.mdf";
         public static string PersistentDataPath => FileSystem.Current.AppDataDirectory;
+        private static string id = "CloudSAd4cccee0";
+        private static string password = "issevents_123";
+        public static string AzureConnectionString => $"Server=tcp:iss-events.database.windows.net,1433;Initial Catalog=EventsDB;Persist Security Info=False;User ID={id};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public static string ValidatePath(string path)
         {
