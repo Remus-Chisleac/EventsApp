@@ -5,35 +5,88 @@ namespace EventsApp;
 
 public partial class EventPageUser : ContentPage
 {
-    private int countClickedInterestedImageButton = 0;
     string eventGuid;
     public Event Event { get; set; }
 
     public EventPageUser(string guid)
-	{
+    {
         InitializeComponent();
 
         eventGuid = guid;
-        Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)), false, "star_empty.png");
+        Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)));
         BindingContext = this;
-	}
+        UpdateInterestedStatus();
+        UpdateGoingStatus();
+    }
 
-    private void InterestedImageButton_Clicked(object sender, EventArgs e)
+    private void UpdateInterestedStatus()
     {
-        countClickedInterestedImageButton++;
-        if (countClickedInterestedImageButton % 2 == 1)
+        if (UsersManager.IsInterested(AppStateManager.currentUserGUID, Guid.Parse(eventGuid)))
         {
-            interestedImageButton.BackgroundColor = Colors.Yellow;
+            interestedImageButton.Source = "star_filled.png";
         }
         else
         {
-            interestedImageButton.BackgroundColor = Colors.White;
+            interestedImageButton.Source = "star_empty.png";
         }
+    }
+
+    private void DonateButton_Clicked(object sender, EventArgs e)
+    {
+        // Open BuyTicketPage
+        if (Event != null)
+        {
+            Navigation.PushAsync(new BuyTicketAndDonatePage(Guid.Parse(Event.GUID), () => OnDonationPaymentReceived(), BuyTicketAndDonatePage.PaymentMethod.Donation));
+        }
+    }
+
+    private void OnDonationPaymentReceived()
+    {
+        UpdateGoingStatus();
+        UpdateInterestedStatus();
+    }
+
+    private void OnTickedPaymentReceived()
+    {
+        UpdateGoingStatus();
+        UpdateInterestedStatus();
+    }
+
+    private void UpdateGoingStatus()
+    {
+        if (UsersManager.IsGoing(AppStateManager.currentUserGUID, Guid.Parse(eventGuid)))
+        {
+            goingImageButton.BackgroundColor = Color.FromHex("#FFD700");
+        }
+        else
+        {
+            goingImageButton.BackgroundColor = Color.FromHex("#FFFFFF");
+        }
+    }
+
+    private void InterestedImageButton_Clicked(object sender, EventArgs e)
+    {
+        if (UsersManager.IsInterested(AppStateManager.currentUserGUID, Guid.Parse(eventGuid)))
+        {
+            UsersManager.RemoveInterestedStatus(AppStateManager.currentUserGUID, Guid.Parse(eventGuid));
+        }
+        else
+        {
+            UsersManager.SetInterestedStatus(AppStateManager.currentUserGUID, Guid.Parse(eventGuid));
+        }
+
+        UpdateInterestedStatus();
     }
 
     private void BuyTicketButton_Clicked(object sender, EventArgs e)
     {
-        goingImageButton.BackgroundColor = Colors.LightGreen;
+        if (Event != null)
+        {
+            Navigation.PushAsync(new BuyTicketAndDonatePage(Guid.Parse(Event.GUID), () => OnTickedPaymentReceived(), BuyTicketAndDonatePage.PaymentMethod.Ticket));
+        }
+
+   
+        UpdateGoingStatus();
     }
 
     private void ShareImageButton_Clicked(object sender, EventArgs e)

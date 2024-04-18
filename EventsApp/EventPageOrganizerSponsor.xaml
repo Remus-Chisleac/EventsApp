@@ -85,7 +85,7 @@
                         Text="Hosted by Cloudflight" 
                         VerticalOptions="End" 
                         TextColor="BlueViolet" 
-                        FontSize="16">  
+                        FontSize="16">
                     </Label>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="10">
@@ -144,7 +144,7 @@
                         FontSize="16">
                     </Label>
                 </HorizontalStackLayout>
-                
+
                 <Label 
                     Text="Details"
                     FontSize="18" 
@@ -180,21 +180,21 @@
                         BackgroundColor="Blue">
                     </Button>
                 </HorizontalStackLayout>
-                    <VerticalStackLayout>
-                        <HorizontalStackLayout Padding="15,0,0,0">
-                            <Label
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Padding="15,0,0,0">
+                        <Label
                                 x:Name="expensesCurrentValue"
                                 Text="75">
-                            </Label>
-                            <Label Text="$"></Label>
-                            <Label Text="out of" Padding="15,0,15,0"></Label>
-                            <Label
+                        </Label>
+                        <Label Text="$"></Label>
+                        <Label Text="out of" Padding="15,0,15,0"></Label>
+                        <Label
                                 x:Name="expensesMaximumValue"
                                 Text="100">
-                            </Label>
-                            <Label Text="$"></Label>
-                        </HorizontalStackLayout>
-                        <Slider
+                        </Label>
+                        <Label Text="$"></Label>
+                    </HorizontalStackLayout>
+                    <Slider
                             x:Name="expensesSlider"
                             Minimum="0"
                             Maximum="100"
@@ -204,8 +204,8 @@
                             Value="75"
                             WidthRequest="150"
                             HorizontalOptions="Start">
-                        </Slider>
-                    </VerticalStackLayout>
+                    </Slider>
+                </VerticalStackLayout>
             </VerticalStackLayout>
             <VerticalStackLayout>
                 <ListView
@@ -263,7 +263,7 @@
                                         Grid.Column="0"
                                         Grid.Row="0"
                                         HorizontalOptions="Center"
-                                        VerticalOptions="Center">       
+                                        VerticalOptions="Center">
                                     </Label>
                                 </Grid>
                             </ViewCell>

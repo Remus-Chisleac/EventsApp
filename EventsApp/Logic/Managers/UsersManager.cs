@@ -85,24 +85,57 @@ namespace EventsApp.Logic.Managers
 
         public static void SetInterestedStatus(Guid userId, Guid eventId)
         {
-            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Interested);
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, "interested");
+
+            if(!_userEventRelationsAdapter.Contains(userEventRelationInfo.GetIdentifier()))
+            {
+                _userEventRelationsAdapter.Add(userEventRelationInfo);
+                return;
+            }
+
             _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
         }
-
 
         public static void SetGoingStatus(Guid userId, Guid eventId)
         {
-            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Going);
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId, "going");
+
+            if (!_userEventRelationsAdapter.Contains(userEventRelationInfo.GetIdentifier()))
+            {
+                _userEventRelationsAdapter.Add(userEventRelationInfo);
+                return;
+            }
+
             _userEventRelationsAdapter.Update(userEventRelationInfo.GetIdentifier(), userEventRelationInfo);
         }
 
-        public static void RemoveStatus(Guid userId, Guid eventId)
+        public static void RemoveInterestedStatus(Guid userId, Guid eventId)
         {
+            bool isGoing = IsGoing(userId, eventId);
+            if (isGoing) return;
+
             UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
             _userEventRelationsAdapter.Delete(userEventRelationInfo.GetIdentifier());
         }
 
+        public static bool IsInterested(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
 
+            if (!_userEventRelationsAdapter.Contains(userEventRelationInfo.GetIdentifier())) return false;
 
+            string status = _userEventRelationsAdapter.Get(userEventRelationInfo.GetIdentifier()).status;
+
+            return status == "interested" || status == "going";
+        }
+
+        public static bool IsGoing(Guid userId, Guid eventId)
+        {
+            UserEventRelationInfo userEventRelationInfo = new UserEventRelationInfo(userId, eventId);
+
+            if (!_userEventRelationsAdapter.Contains(userEventRelationInfo.GetIdentifier())) return false;
+
+            return _userEventRelationsAdapter.Get(userEventRelationInfo.GetIdentifier()).status == "going";
+        }
     }
 }

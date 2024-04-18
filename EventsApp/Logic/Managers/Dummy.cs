@@ -18,7 +18,7 @@ namespace EventsApp.Logic.Managers
             AddCurrentlyLoggedUser();
             PopulateUsers(10);
             PopulateEvents(10);
-
+            PopulateStatuses();
             //List<UserInfo> users = UsersManager.GetAllUsers();
             //List<EventInfo> events = EventsManager.GetAllEvents();
         }
@@ -50,6 +50,24 @@ namespace EventsApp.Logic.Managers
             {
                 EventInfo eventInfo = GenerateRandomEvent(GetRandomUserGUID());
                 EventsManager.AddNewEvent(eventInfo);
+            }
+        }
+
+        public static void PopulateStatuses()
+        {
+            List<UserInfo> users = UsersManager.GetAllUsers();
+            List<EventInfo> events = EventsManager.GetAllEvents();
+            foreach (UserInfo userInfo in users)
+            {
+                Guid eventGuid = events[random.Next(events.Count)].GUID;
+                UsersManager.SetInterestedStatus(userInfo.GUID, eventGuid);
+                UsersManager.SetGoingStatus(userInfo.GUID, eventGuid);
+            }
+
+            foreach (EventInfo eventInfo in events)
+            {
+                Guid userGuid = AppStateManager.currentUserGUID;
+                UsersManager.SetInterestedStatus(userGuid, eventInfo.GUID);
             }
         }
 

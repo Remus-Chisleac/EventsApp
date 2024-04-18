@@ -19,6 +19,9 @@ namespace EventsApp
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<EventPageUser>();
+
             ManagersInitializer.Initialize();
             return builder.Build();
         }

@@ -119,14 +119,9 @@ namespace EventsApp.Logic.Entities
     {
         [PrimaryKey] public Guid userGUID;
         [PrimaryKey] public Guid eventGUID;
-        public enum Status
-        {
-            Going,
-            Interested,
-        }
-        public Status status;
+        public string status;
 
-        public UserEventRelationInfo(Guid userGUID, Guid eventGUID, Status status)
+        public UserEventRelationInfo(Guid userGUID, Guid eventGUID, string status)
         {
             this.userGUID = userGUID;
             this.eventGUID = eventGUID;
@@ -137,7 +132,7 @@ namespace EventsApp.Logic.Entities
         {
             this.userGUID = userGUID;
             this.eventGUID = eventGUID;
-            status = Status.Interested;
+            status = "";
         }
     }
 

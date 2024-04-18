@@ -17,7 +17,10 @@ namespace EventsApp
         DateTime date = DateTime.Now;
         string FormattedDate;
 
-        public ObservableCollection<Event> Events { get; set; }
+        public ObservableCollection<Event> Events { 
+            get; 
+            set; 
+        }
 
         private ObservableCollection<Event> GetEvents()
         {
@@ -26,8 +29,11 @@ namespace EventsApp
 
             foreach (EventInfo eventInfo in eventInfos)
             {
-                Event newEvent = new Event(eventInfo, false, "star_empty.png");
+                Event newEvent = new Event(eventInfo);
                 events.Add(newEvent);
+                newEvent.UpdateInterestedStatus();
+                OnPropertyChanged(nameof(newEvent.InterestedStar));
+                newEvent.UpdateInterestedStatus();
             }
 
             return events;
@@ -37,7 +43,6 @@ namespace EventsApp
         {
             InitializeComponent();
             FormattedDate = date.ToString("dddd, d MMM, hh:mm tt");
-            Events = GetEvents();
             /*
             Events = new ObservableCollection<Event>
             {
@@ -45,6 +50,30 @@ namespace EventsApp
                 new Event("ubb_logo.png", "UBB Cluj", "Job Fair", "Cluj, Dorobantilor", FormattedDate, "Free", 110, false, "star_empty.png")
             };*/
 
+            RefreshEvents();
+        }
+
+        private void RefreshInterestedStars()
+        {
+            foreach (Event ev in Events)
+            {
+                ev.UpdateInterestedStatus();
+                OnPropertyChanged(nameof(ev.InterestedStar));
+                ev.UpdateInterestedStatus();
+            }
+            BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            RefreshInterestedStars();
+        }
+
+        public void RefreshEvents()
+        {
+            if(Events != null) Events.Clear();
+            Events = GetEvents();
             BindingContext = this;
         }
 
@@ -87,16 +116,19 @@ namespace EventsApp
 
         private void OnStarTapped(object sender, EventArgs e)
         {
-            var tappedStar = (Image)sender;
-            var tappedEvent = (Event)tappedStar.BindingContext;
+            Image tappedStar = (Image)sender;
+            Event tappedEvent = (Event)tappedStar.BindingContext;
 
-            // Toggle the ClickedStar property
-            tappedEvent.ClickedStar = !tappedEvent.ClickedStar;
+            if(!UsersManager.IsInterested(AppStateManager.currentUserGUID, Guid.Parse(tappedEvent.GUID)))
+            {
+                UsersManager.SetInterestedStatus(AppStateManager.currentUserGUID, Guid.Parse(tappedEvent.GUID));
+            }
+            else
+            {
+                UsersManager.RemoveInterestedStatus(AppStateManager.currentUserGUID, Guid.Parse(tappedEvent.GUID));
+            }
 
-            // Update the StarIcon property based on ClickedStar
-            tappedEvent.StarIcon = tappedEvent.ClickedStar ? "star_filled.png" : "star_empty.png";
-
-            OnPropertyChanged(nameof(tappedEvent.StarIcon));
+            tappedEvent.UpdateInterestedStatus();
         }
         #endregion
     }

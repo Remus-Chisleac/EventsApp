@@ -119,7 +119,7 @@ namespace EventsApp.Logic.Managers
             List<UserInfo> users = new List<UserInfo>();
             foreach(UserEventRelationInfo relationInfo in userEventRelationInfos)
             {
-                if(relationInfo.eventGUID == eventId && relationInfo.status == UserEventRelationInfo.Status.Interested)
+                if(relationInfo.eventGUID == eventId && relationInfo.status == "interested")
                 {
                     UserInfo user = UsersManager.GetUser(relationInfo.userGUID);
                     users.Add(user);
@@ -135,7 +135,7 @@ namespace EventsApp.Logic.Managers
             List<UserInfo> users = new List<UserInfo>();
             foreach (UserEventRelationInfo relationInfo in userEventRelationInfos)
             {
-                if (relationInfo.eventGUID == eventId && relationInfo.status == UserEventRelationInfo.Status.Going)
+                if (relationInfo.eventGUID == eventId && relationInfo.status == "going")
                 {
                     UserInfo user = UsersManager.GetUser(relationInfo.userGUID);
                     users.Add(user);
@@ -256,7 +256,7 @@ namespace EventsApp.Logic.Managers
             string correctCardNumber = cardNumber; // get this from database
             string correctCvv = cvv; // get this from database
             DateTime correctExpirationDate = expirationDate; // get this from database
-
+            return true;
             if (correctExpirationDate.Date < DateTime.Now.Date || correctCardHolderName != cardHolderName || correctCardNumber != cardNumber || correctCvv != cvv || correctExpirationDate.Date != expirationDate.Date)
             {
                 return false;
@@ -265,14 +265,12 @@ namespace EventsApp.Logic.Managers
             return true;
         }
 
-        public static void BuyTicket(Guid eventId, Guid userId, string cardHolderName, string cardNumber, string cvv, DateTime expirationDate)
+        public static void BuyTicket(Guid userId, Guid eventId, string cardHolderName, string cardNumber, string cvv, DateTime expirationDate)
         {
             if (ProcessPayment(cardHolderName, cardNumber, cvv, expirationDate))
             {
-                UserEventRelationInfo relationInfo = new UserEventRelationInfo(userId, eventId, UserEventRelationInfo.Status.Going);
-                _userEventRelationsAdapter.Add(relationInfo);
+                UsersManager.SetGoingStatus(userId, eventId);
             }
         }
-
     }
 }

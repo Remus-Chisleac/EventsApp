@@ -39,10 +39,11 @@ namespace EventsApp.Model_View.Entities
             }
         }
 
-        public string ParticipantsInfoString {
+        public string ParticipantsInfoString 
+        {
             get
             {
-                return NoOfParticipants.ToString() + " participants";
+                return $"{EventsManager.GetNumberOfParticipants(Guid.Parse(GUID))} / {NoOfParticipants.ToString()}";
             }
         }
 
@@ -54,43 +55,55 @@ namespace EventsApp.Model_View.Entities
             }
         }
 
+        private bool _interested;
 
-
-        //trebuia sa adaug asta in event alfel nu afiseaza steaua in ListView
-        private bool _clickedStar;
-
-        public bool ClickedStar
+        public string InterestedStar
         {
-            get { return _clickedStar; }
-            set
+            get
             {
-                if (_clickedStar != value)
+                if (_interested)
                 {
-                    _clickedStar = value;
-                    OnPropertyChanged(nameof(ClickedStar));
-                    OnPropertyChanged(nameof(StarIcon));
+                    return "star_filled.png";
+                }
+                else
+                {
+                    return "star_empty.png";
                 }
             }
         }
-        private string _starIcon;
-        public string StarIcon
+
+        public void UpdateInterestedStatus()
         {
-            get { return _starIcon; }
-            set
+            if (UsersManager.IsInterested(AppStateManager.currentUserGUID, Guid.Parse(GUID)) ||
+                UsersManager.IsGoing(AppStateManager.currentUserGUID, Guid.Parse(GUID)))
             {
-                if (_starIcon != value)
-                {
-                    _starIcon = value;
-                    OnPropertyChanged(nameof(StarIcon));
-                }
+                _interested = true;
             }
+            else
+            {
+                _interested = false;
+            }
+            OnPropertyChanged(nameof(InterestedStar));
         }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
+        public string GetStar()
+        {
+            if (_interested)
+            {
+                return "star_filled.png";
+            }
+            else
+            {
+                return "star_empty.png";
+            }
+        }
 
-        public Event(string GUID, string picture, string organizer, string name, string description, string location, string date, string price, int participants, bool clicked, string star)
+        public Event(string GUID, string picture, string organizer, string name, string description, string location, string date, string price, int participants)
         {
             this.GUID = GUID;
             Picture = picture;
@@ -101,11 +114,9 @@ namespace EventsApp.Model_View.Entities
             StartDate = date;
             Price = price;
             NoOfParticipants = participants;
-            _starIcon = star;
-            _clickedStar = clicked;
         }
 
-        public Event(EventInfo eventInfo, bool clicked, string star)
+        public Event(EventInfo eventInfo)
         {
             GUID = eventInfo.GUID.ToString();
             Picture = eventInfo.bannerURL;
@@ -116,8 +127,7 @@ namespace EventsApp.Model_View.Entities
             StartDate = eventInfo.startDate.ToString();
             Price = eventInfo.entryFee.ToString();
             NoOfParticipants = eventInfo.maxParticipants;
-            _starIcon = star;
-            _clickedStar = clicked;
+            UpdateInterestedStatus();
         }
     }
 }

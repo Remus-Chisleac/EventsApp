@@ -154,8 +154,8 @@
                                 <Label Grid.Row="4" Grid.Column="2" Text="{Binding NoOfParticipants}" HorizontalOptions="CenterAndExpand" FontSize="15" Margin="0,0,15,0"/>
                                 <Label Grid.Row="4" Grid.Column="3" Text="going" HorizontalOptions="Start"/>
                                 <Image Source="ticket.svg" Grid.Row="4" Grid.Column="4" Aspect="AspectFit" Margin="0,1,0,1"/>
-                                <Label Grid.Row="4" Grid.Column="5" Text="{Binding Price}" HorizontalOptions="StartAndExpand" />
-                                <Image Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Source="{Binding StarIcon}" Aspect="AspectFit">
+                                <Label Grid.Row="4" Grid.Column="5" Text="{Binding PriceInfoString}" HorizontalOptions="StartAndExpand" />
+                                <Image Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Source="{Binding InterestedStar}" Aspect="AspectFit">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnStarTapped"/>
                                     </Image.GestureRecognizers>

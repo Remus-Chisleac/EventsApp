@@ -16,7 +16,7 @@
             <Image 
                 x:Name="bannerImage"
                 WidthRequest="300" 
-                Source="https://cdn-az.allevents.in/events1/banners/04daa43abf318b38d671e7f203738bfb5c4056c146e6ee88e0121791efac0f88-rimg-w960-h503-gmir.jpg?v=1711049226">
+                Source="{Binding Event.Picture}">
             </Image>
             <HorizontalStackLayout Spacing="8">
                 <Label 
@@ -34,16 +34,16 @@
                         VerticalTextAlignment="End" 
                         TextColor="DarkBlue">
                     </Label>
-                    <Button 
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+            <Button 
                         x:Name="buyTicketButton"
                         Text="Buy Ticket" 
                         BackgroundColor="Blue" 
                         HeightRequest="40" 
                         CornerRadius="50" 
                         Clicked="BuyTicketButton_Clicked">
-                    </Button>
-                </HorizontalStackLayout>
-            </HorizontalStackLayout>
+            </Button>
             <HorizontalStackLayout Spacing="50" Padding="20">
                 <VerticalStackLayout>
                     <ImageButton 
@@ -51,7 +51,7 @@
                         HeightRequest="30" 
                         WidthRequest="30" 
                         CornerRadius="8" 
-                        Source="https://cdn-icons-png.freepik.com/256/10944/10944634.png" 
+                        Source="star_empty.png"
                         Clicked="InterestedImageButton_Clicked">
                     </ImageButton>
                     <Label Text="Interested" FontSize="12"></Label>
@@ -177,6 +177,113 @@
                 Text="Sponsored by: UBB Cluj, Primaria Cluj-Napoca" 
                 FontSize="15">
             </Label>
+            <HorizontalStackLayout Spacing="20">
+                <Label 
+                        Text="Expenses"
+                        FontSize="20"
+                        TextColor="DarkBlue"
+                        VerticalOptions="Center">
+                </Label>
+                <Button
+                        Text="Donate"
+                        Clicked="DonateButton_Clicked"
+                        FontSize="15"
+                        CornerRadius="50"
+                        HeightRequest="35"
+                        BackgroundColor="Blue">
+                </Button>
+            </HorizontalStackLayout>
+            <VerticalStackLayout>
+                <HorizontalStackLayout Padding="15,0,0,0">
+                    <Label
+                                x:Name="expensesCurrentValue"
+                                Text="75">
+                    </Label>
+                    <Label Text="$"></Label>
+                    <Label Text="out of" Padding="15,0,15,0"></Label>
+                    <Label
+                                x:Name="expensesMaximumValue"
+                                Text="100">
+                    </Label>
+                    <Label Text="$"></Label>
+                </HorizontalStackLayout>
+                <Slider
+                            x:Name="expensesSlider"
+                            Minimum="0"
+                            Maximum="100"
+                            ThumbColor="LightGreen"
+                            MaximumTrackColor="LightGreen"
+                            MinimumTrackColor="LightGreen"
+                            Value="75"
+                            WidthRequest="150"
+                            HorizontalOptions="Start">
+                </Slider>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <ListView
+                    x:Name="expensesListView"
+                    WidthRequest="250"
+                    RowHeight="25"
+                    HorizontalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    BackgroundColor="LightGray">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Text="{Binding}"
+                                        FontSize="16"
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label 
+                    Text="Top Donors"
+                    FontSize="16"
+                    Padding="0,10,0,0">
+                </Label>
+                <ListView
+                    x:Name="donorsListView"
+                    WidthRequest="250"
+                    RowHeight="25"
+                    HorizontalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid BackgroundColor="LightGray">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Text="{Binding}"
+                                        FontSize="16"
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                    </Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
         </VerticalStackLayout>
+        
     </ScrollView>
 </ContentPage>

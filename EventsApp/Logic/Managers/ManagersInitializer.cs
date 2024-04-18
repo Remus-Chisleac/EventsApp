@@ -20,7 +20,9 @@ namespace EventsApp.Logic.Managers
             //CSVAdapter<Entities.EventInfo> eventsCSVAdapter = new CSVAdapter<Entities.EventInfo>("EventsCSV");
             //usersCSVAdapter.Connect();
             //eventsCSVAdapter.Connect();
-            GenerateLocalDatabase(true);
+            bool regenerateDB = false;
+
+            SetupDB(true, true, regenerateDB);
 
             DataBaseAdapter<UserInfo> usersAdapter = new DataBaseAdapter<UserInfo>(connectionString);
             DataBaseAdapter<Entities.EventInfo> eventsAdapter = new DataBaseAdapter<Entities.EventInfo>(connectionString);
@@ -28,23 +30,18 @@ namespace EventsApp.Logic.Managers
             DataBaseAdapter<ReviewInfo> reviewsAdapter = new DataBaseAdapter<ReviewInfo>(connectionString);
             DataBaseAdapter<AdminInfo> adminsAdapter = new DataBaseAdapter<AdminInfo>(connectionString);
             DataBaseAdapter<UserEventRelationInfo> userEventRelationsAdapter = new DataBaseAdapter<UserEventRelationInfo>(connectionString);
-
-            usersAdapter.Connect();
-            eventsAdapter.Connect();
-            reportsAdapter.Connect();
-            reviewsAdapter.Connect();
-            adminsAdapter.Connect();
-            userEventRelationsAdapter.Connect();
+            DataBaseAdapter<DonationInfo> donationsAdapter = new DataBaseAdapter<DonationInfo>(connectionString);
 
             UsersManager.Initialize(usersAdapter, adminsAdapter, userEventRelationsAdapter);
             EventsManager.Initialize(eventsAdapter, userEventRelationsAdapter);
             ReportsManager.Initialize(reportsAdapter);
             ReviewsManager.Initialize(reviewsAdapter);
+            DonationsManager.Initialize(donationsAdapter);
 
-            Dummy.Populate();
+            if(regenerateDB) Dummy.Populate();
         }
 
-        public static void GenerateLocalDatabase(bool wipeExisting = false, bool azure = true)
+        public static void SetupDB(bool wipeExisting = false, bool azure = true, bool dropTables = false)
         {
             if (!azure)
             {
@@ -102,81 +99,82 @@ namespace EventsApp.Logic.Managers
             connectionString = AppDataInfo.AzureConnectionString;
 
             // ------------------- Create tables -------------------
-            string namespaceName = "EventsApp.Logic.Entities";
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var types = assembly.GetTypes();
-
-            var structsInNamespace = types
-                .Where(t => t.Namespace == namespaceName && t.IsValueType && !t.IsEnum)
-                .ToList();
-
-            foreach (var structType in structsInNamespace)
+            if (dropTables)
             {
-                string tableName = structType.GetCustomAttribute<TableAttribute>().TableName;
-                // Drop table if exists
-                string dropTableQuery = $"DROP TABLE IF EXISTS {tableName}";
+                string namespaceName = "EventsApp.Logic.Entities";
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                var assembly = Assembly.GetExecutingAssembly();
+                var types = assembly.GetTypes();
+
+                var structsInNamespace = types
+                    .Where(t => t.Namespace == namespaceName && t.IsValueType && !t.IsEnum)
+                    .ToList();
+
+                foreach (var structType in structsInNamespace)
                 {
-                    SqlCommand command = new SqlCommand(dropTableQuery, connection);
-                    try
+                    string tableName = structType.GetCustomAttribute<TableAttribute>().TableName;
+                    // Drop table if exists
+                    string dropTableQuery = $"DROP TABLE IF EXISTS {tableName}";
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        connection.Open();
-                        command.ExecuteNonQuery();
+                        SqlCommand command = new SqlCommand(dropTableQuery, connection);
+                        try
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
-                    catch (Exception ex)
+
+                    List<string> columns = new List<string>();
+
+                    // Get only structs with no consts or enums
+                    foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
                     {
-                        Console.WriteLine(ex.Message);
+                        bool primaryKey = field.GetCustomAttribute<PrimaryKeyAttribute>() != null;
+                        string columnName = field.Name;
+                        string columnType = GetFieldType(field.FieldType);
+
+                        string column = $"{columnName} {columnType}";
+
+                        columns.Add(column);
                     }
-                }
 
-                List<string> columns = new List<string>();
-
-                // Get only structs with no consts or enums
-                foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
-                {
-                    bool primaryKey = field.GetCustomAttribute<PrimaryKeyAttribute>() != null;  
-                    string columnName = field.Name;
-                    string columnType = GetFieldType(field.FieldType);
-
-                    string column = $"{columnName} {columnType}";
-
-                    columns.Add(column);
-                }
-
-                // Add primery keys
-                string primaryKeyString = "PRIMARY KEY (";
-                foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
-                {
-                    if (field.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                    // Add primery keys
+                    string primaryKeyString = "PRIMARY KEY (";
+                    foreach (var field in structType.GetFields(BindingFlags.Public | BindingFlags.Instance))
                     {
-                        primaryKeyString += field.Name + ", ";
+                        if (field.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                        {
+                            primaryKeyString += field.Name + ", ";
+                        }
                     }
-                }
-                primaryKeyString = primaryKeyString.Remove(primaryKeyString.Length - 2) + ")";
+                    primaryKeyString = primaryKeyString.Remove(primaryKeyString.Length - 2) + ")";
 
-                columns.Add(primaryKeyString);
+                    columns.Add(primaryKeyString);
 
-                string createTableQuery = $"CREATE TABLE {tableName} ({string.Join(", ", columns)})";
-                
+                    string createTableQuery = $"CREATE TABLE {tableName} ({string.Join(", ", columns)})";
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand command = new SqlCommand(createTableQuery, connection);
-                    try
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
+                        SqlCommand command = new SqlCommand(createTableQuery, connection);
+                        try
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                 }
             }
-
-            
         }
 
         private static string GetFieldType(Type fieldType)
