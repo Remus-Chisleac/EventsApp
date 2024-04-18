@@ -147,7 +147,7 @@ namespace EventsApp.Logic.Entities
             Nudity,
             Spam,
             Violence,
-            IP,
+            None,
             Fraud,
             Offensive,
             GuidelinesViolations

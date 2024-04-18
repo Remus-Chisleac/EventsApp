@@ -33,7 +33,7 @@
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
                 <!--Sort Picker-->
-                <Picker  x:Name="EventsSort" Grid.Column="0" Title="Sort" FontSize="20" FontAttributes="Bold" TextColor="Black" 
+                <Picker  x:Name="EventsSort" SelectedIndexChanged="OnSortChanged" Grid.Column="0" Title="Sort" FontSize="20" FontAttributes="Bold" TextColor="Black" 
                          Background="White" HorizontalOptions="Center"  Margin="10,0,0,0">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
@@ -147,7 +147,7 @@
                                 <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding Organizer}" TextColor="#646668" FontAttributes="Bold" FontSize="15" HorizontalOptions="Start"/>
                                 <Image Source="calendar.svg" Grid.Row="2" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>
 
-                                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding Date}" FontSize="14"/>
+                                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding StartDate}" FontSize="14"/>
                                 <Image Source="location.svg" Grid.Row="3" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>
                                 <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding Location}" FontSize="14"/>
                                 <Image Source="checkedbox.svg" Grid.Row="4" Grid.Column="1" Aspect="AspectFit" Margin="0,1,0,1"/>

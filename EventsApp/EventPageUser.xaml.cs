@@ -6,6 +6,7 @@ namespace EventsApp;
 public partial class EventPageUser : ContentPage
 {
     string eventGuid;
+    bool isOrganizerMode = false;
     public Event Event { get; set; }
 
     public EventPageUser(string guid)
@@ -15,8 +16,31 @@ public partial class EventPageUser : ContentPage
         eventGuid = guid;
         Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)));
         BindingContext = this;
+
+        isOrganizerMode = EventsManager.IsOrganizer(AppStateManager.currentUserGUID, Guid.Parse(guid));
+
+        UpdateProperties();
         UpdateInterestedStatus();
         UpdateGoingStatus();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        RefreshEvent();
+        //RefreshInterestedStars();
+    }
+
+    private void RefreshEvent()
+    {
+        Event = new Event(EventsManager.GetEvent(Guid.Parse(eventGuid)));
+        BindingContext = this;
+        OnPropertyChanged(nameof(Event));
+    }
+
+    private void UpdateProperties()
+    {
+        buyTicketButton.Text = isOrganizerMode ? "Edit Event" : "Buy Ticket";
     }
 
     private void UpdateInterestedStatus()
@@ -80,23 +104,29 @@ public partial class EventPageUser : ContentPage
 
     private void BuyTicketButton_Clicked(object sender, EventArgs e)
     {
-        if (Event != null)
+        if (Event == null) return;
+
+        if (isOrganizerMode)
+        {
+            Navigation.PushAsync(new AddOrEditPage(AppStateManager.currentUserGUID, Guid.Parse(Event.GUID), true));
+        }
+        else
         {
             Navigation.PushAsync(new BuyTicketAndDonatePage(Guid.Parse(Event.GUID), () => OnTickedPaymentReceived(), BuyTicketAndDonatePage.PaymentMethod.Ticket));
         }
 
-   
+
         UpdateGoingStatus();
     }
 
     private void ShareImageButton_Clicked(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new UserSharePage(AppStateManager.currentUserGUID, Guid.Parse(eventGuid)));
     }
 
     private void ReportImageButton_Clicked(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new ReportPage(AppStateManager.currentUserGUID, Guid.Parse(eventGuid)));
     }
 
     private void BackImageButton_Clicked(object sender, EventArgs e)

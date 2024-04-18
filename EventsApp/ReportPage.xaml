@@ -24,16 +24,12 @@
                FontSize="20"
                Margin="15,0,0,30"/>
 
-
-
-
-
         <FlexLayout AlignContent="Start" 
                   AlignItems="Start"
                   Direction="Row"
                  JustifyContent="Start" 
                  Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox x:Name="SpamCB" IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Spam" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
 
@@ -42,7 +38,7 @@
           Direction="Row"
          JustifyContent="Start" 
          Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox x:Name="FraudCB"  IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Fraud" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
 
@@ -51,7 +47,7 @@
           Direction="Row"
          JustifyContent="Start" 
          Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox x:Name="HarrasmentCB" IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Harassment" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
 
@@ -60,7 +56,7 @@
           Direction="Row"
          JustifyContent="Start" 
          Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox  x:Name="OffensiveCB" IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Offensive" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
 
@@ -69,7 +65,7 @@
           Direction="Row"
          JustifyContent="Start" 
          Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox x:Name="ViolationsCB" IsChecked="{Binding IsChecked}" Margin="0,2,0,10" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Guidelines Violations" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
         
@@ -78,12 +74,13 @@
    Direction="Row"
   JustifyContent="Start" 
   Wrap="Wrap">
-            <CheckBox IsChecked="{Binding IsChecked}" Margin="0,2,0,30" HeightRequest="50" Color="#3A86FF" />
+            <CheckBox x:Name="NudityCB" IsChecked="{Binding IsChecked}" Margin="0,2,0,30" HeightRequest="50" Color="#3A86FF" />
             <Label Text="Nudity" Margin="0,8,0,0" FontSize="20"/>
         </FlexLayout>
 
 
-        <Button Text="Submit" Margin="0,60,0,0" BackgroundColor="#3A86FF" HeightRequest="55" WidthRequest="340" CornerRadius="100" FontSize="20"/>
+        <Button Clicked="Button_Clicked"
+                Text="Submit" Margin="0,60,0,0" BackgroundColor="#3A86FF" HeightRequest="55" WidthRequest="340" CornerRadius="100" FontSize="20"/>
 
     </VerticalStackLayout>
 

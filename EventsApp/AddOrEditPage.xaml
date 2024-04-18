@@ -23,30 +23,34 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <!--Title-->
                 <Label Grid.Row="0" Grid.Column="0" Text="Title" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
-                <Entry x:Name="LocationEntry" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"  Placeholder="Title" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="TitleEntry" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"  Placeholder="Title" HorizontalTextAlignment="Center"/>
                 <!--Logo-->
                 <Label Grid.Row="1" Grid.Column="0" Text="Logo URL" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
                 <Entry x:Name="LogoURLEntry" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  Placeholder="Logo URL" HorizontalTextAlignment="Center"/>
+                <!--Location-->
+                <Label Grid.Row="2" Grid.Column="0" Text="Location" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
+                <Entry x:Name="LocationEntry" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"  Placeholder="Location" HorizontalTextAlignment="Center"/>
                 <!--Price-->
-                <Label Grid.Row="2" Grid.Column="0" Text="Price" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
-                <Entry x:Name="PriceEntry" Grid.Row="2" Grid.Column="1" Placeholder="Price" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="0" Text="Price" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
+                <Entry x:Name="PriceEntry" Grid.Row="3" Grid.Column="1" Placeholder="Price" HorizontalTextAlignment="Center"/>
                 <!--AgeLimit-->
-                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="Age Limit" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16" HorizontalOptions="CenterAndExpand"/>
-                <Entry x:Name="AgeLimitEntry" Grid.Row="2" Grid.Column="4" Placeholder="Age Limit" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Text="Age Limit" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16" HorizontalOptions="CenterAndExpand"/>
+                <Entry x:Name="AgeLimitEntry" Grid.Row="3" Grid.Column="4" Placeholder="Age Limit" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
                 <!--Date-->
-                <Image Grid.Row="3" Grid.Column="2" Source="clock.svg" HeightRequest="18" WidthRequest="18" HorizontalOptions="CenterAndExpand"/>
-                <Label Grid.Row="3" Grid.Column="0" Text="Date" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16" HorizontalOptions="Start"/>
-                <DatePicker Grid.Row="3" Grid.Column="1" HorizontalOptions="StartAndExpand"/>
+                <Image Grid.Row="4" Grid.Column="2" Source="clock.svg" HeightRequest="18" WidthRequest="18" HorizontalOptions="CenterAndExpand"/>
+                <Label Grid.Row="4" Grid.Column="0" Text="Date" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16" HorizontalOptions="Start"/>
+                <DatePicker x:Name="StartDatePicker" Grid.Row="4" Grid.Column="1" HorizontalOptions="StartAndExpand"/>
                 <!--Time-->
-                <TimePicker Grid.Row="3" Grid.Column="3" Time="11:15" HorizontalOptions="StartAndExpand"/>
-                <TimePicker Grid.Row="3" Grid.Column="4" Time="13:00" HorizontalOptions="StartAndExpand"/>
+                <TimePicker x:Name="StartTimePicker" Grid.Row="4" Grid.Column="3" Time="11:15" HorizontalOptions="StartAndExpand"/>
+                <TimePicker x:Name="EndTimePicker" Grid.Row="4" Grid.Column="4" Time="13:00" HorizontalOptions="StartAndExpand"/>
                 <!--Description-->
-                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Text="Description" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
-                <Entry x:Name="DescriptionEntry" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Placeholder="Description" 
+                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Text="Description" Margin="0,15,0,0" FontAttributes="Bold" FontSize="16"/>
+                <Editor x:Name="DescriptionEntry" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Placeholder="Description" 
                        HorizontalTextAlignment="Start" VerticalTextAlignment="Start" HeightRequest="100" MaxLength="1000"/>
             </Grid>
             <!--Categories List View-->
@@ -92,7 +96,8 @@
             <FlexLayout AlignItems="Start" Direction="Row" Margin="10" MaximumWidthRequest="400">
                 <Button Text="Add Expense" Clicked="OnExpensesClicked" TextColor="Black" BackgroundColor="White" FontSize="16" FontAttributes="Bold"
                         BorderColor="Black" BorderWidth="1" CornerRadius="25" WidthRequest="150" Margin="0,0,5,0"/>
-                <Entry x:Name="ExpenseEntry" Placeholder="Expense Name and Value" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="ExpenseNameEntry" Placeholder="Expense Name and Value" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="ExpenseCostEntry" Placeholder="Expense Name and Value" HorizontalTextAlignment="Center"/>
             </FlexLayout>
             <FlexLayout x:Name="ExpensesStack" AlignContent="Start" AlignItems="Start"
                         HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
@@ -106,11 +111,11 @@
                         HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
                         Direction="Row" JustifyContent="SpaceEvenly"
                         Wrap="Wrap" Margin="0,20,0,20">
-                <Button x:Name="DeleteBtn" Text="Delete" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" 
+                <Button x:Name="DeleteBtn" Clicked="OnDeleteButtonClicked"  Text="Delete" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" 
                         Padding="30,15,30,15" CornerRadius="40" FontSize="18"/>
-                <Button x:Name="PublishBtn" Text="Publish" BackgroundColor="#3A86FF" TextColor="White" FontAttributes="Bold" 
+                <Button x:Name="PublishBtn" Clicked="OnPublishedButtonClicked" Text="Publish" BackgroundColor="#3A86FF" TextColor="White" FontAttributes="Bold" 
                         Padding="30,15,30,15" CornerRadius="40" FontSize="18"/>
-                <Button x:Name="SaveBtn" Text="Save" BackgroundColor="#3A86FF" TextColor="White" FontAttributes="Bold" 
+                <Button x:Name="SaveBtn" Clicked="OnSaveButtonClicked" Text="Save" BackgroundColor="#3A86FF" TextColor="White" FontAttributes="Bold" 
                         Padding="30,15,30,15" CornerRadius="40" FontSize="18"/>
             </FlexLayout>
         </StackLayout>

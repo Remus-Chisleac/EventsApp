@@ -124,7 +124,7 @@ namespace EventsApp.Model_View.Entities
             Name = eventInfo.eventName;
             Description = eventInfo.description;
             Location = eventInfo.location;
-            StartDate = eventInfo.startDate.ToString();
+            StartDate = eventInfo.startDate.Date.ToString();
             Price = eventInfo.entryFee.ToString();
             NoOfParticipants = eventInfo.maxParticipants;
             UpdateInterestedStatus();

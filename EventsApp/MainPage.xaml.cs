@@ -22,9 +22,29 @@ namespace EventsApp
             set; 
         }
 
-        private ObservableCollection<Event> GetEvents()
+        private ObservableCollection<Event> GetEvents(string sortOptions = null)
         {
-            List<EventInfo> eventInfos = EventsManager.GetAllEvents();
+            List<EventInfo> eventInfos = new List<EventInfo>();
+
+            EventsManager.GetAllEvents();
+            string sortOption = EventsSort.SelectedItem?.ToString() ?? "";
+
+            switch (sortOption)
+            {
+                case "By Popularity":
+                    eventInfos = EventsManager.SortEventsByPopularityAscending();
+                    break;
+                case "By Date":
+                    eventInfos = EventsManager.SortEventsByDateAscending();
+                    break;
+                case "By Price":
+                    eventInfos = EventsManager.SortEventsByPriceAscending();
+                    break;
+                default:
+                    eventInfos = EventsManager.GetAllEvents();
+                    break;
+            }
+
             ObservableCollection<Event> events = new ObservableCollection<Event>();
 
             foreach (EventInfo eventInfo in eventInfos)
@@ -64,16 +84,28 @@ namespace EventsApp
             BindingContext = this;
         }
 
+        private void RefreshAllEvents()
+        {
+
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            RefreshInterestedStars();
+            RefreshEvents();
+            //RefreshInterestedStars();
+        }
+
+        public void OnSortChanged(object sender, EventArgs e)
+        {
+            RefreshEvents();
         }
 
         public void RefreshEvents()
         {
             if(Events != null) Events.Clear();
             Events = GetEvents();
+            OnPropertyChanged(nameof(Events));
             BindingContext = this;
         }
 
@@ -93,7 +125,7 @@ namespace EventsApp
 
         void OnImageButtonClicked(object sender, EventArgs e)
         {
-            Shell.Current.Navigation.PushAsync(new AddOrEditPage());
+            Shell.Current.Navigation.PushAsync(new AddOrEditPage(AppStateManager.currentUserGUID, Guid.Empty, false));
         }
 
         private void OnSearchBarTextChanged(object sender, EventArgs e)

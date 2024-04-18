@@ -43,6 +43,14 @@ namespace EventsApp.Logic.Managers
             return false;
         }
 
+        public static bool IsOrganizer(Guid userId, Guid eventId)
+        {
+            EventInfo eventInfo = GetEvent(eventId);
+            if (eventInfo.organizerGUID == userId)
+                return true;
+            return false;
+        }
+
         public static void AddNewEvent(EventInfo eventInfo)
         {
             _eventsAdapter.Add(eventInfo);
