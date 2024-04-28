@@ -1,8 +1,8 @@
-﻿using ObjCRuntime;
-using UIKit;
-
-namespace EventsApp
+﻿namespace EventsApp
 {
+    using ObjCRuntime;
+    using UIKit;
+
     public class Program
     {
         // This is the main entry point of the application.
