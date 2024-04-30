@@ -9,8 +9,9 @@ namespace EventsAppTests_XUnitTest
     using EventsApp.Logic.Managers;
     public class ManagersTests_AppDataInfo
     {
+
         [Fact]
-        public void ValidatePath__ReturnsCorrectPath()
+        public void ValidatePath_UsersCSV_ReturnsCorrectPath()
         {
             try
             {

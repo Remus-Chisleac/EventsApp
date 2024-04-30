@@ -1,10 +1,10 @@
 ﻿namespace EventsApp.Logic.Managers
 {
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     using EventsApp.Logic.Adapters;
     using EventsApp.Logic.Entities;
     using EventsApp.Logic.Extensions;
-
     public static class EventsManager
     {
         private static DataAdapter<EventInfo> eventsAdapter;
