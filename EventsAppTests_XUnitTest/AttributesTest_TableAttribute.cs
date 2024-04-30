@@ -11,7 +11,7 @@ namespace EventsAppTests_XUnitTest
     {
         public void TableAttribute_Constructor(string name)
         {
-            var table = new TableAttribute(name);
+            TableAttribute table = new TableAttribute(name);
 
             Assert.Equal(name, table.TableName);
         }

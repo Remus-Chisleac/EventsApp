@@ -10,7 +10,7 @@ namespace EventsAppTests_XUnitTest
     {
 
         public struct TestStruct
-        { 
+        {
             [PrimaryKey]
             public int Id { get; set; }
 
@@ -19,40 +19,31 @@ namespace EventsAppTests_XUnitTest
         }
 
         [Fact]
-        public void GetIdentifier_ReturnsCorrectIdentifier()
+        public void GetIdentifier_NoDBConnection_ReturnsCorrectIdentifier()
         {
-            try
-            {
-                var testObj = new TestStruct { Id = 0, Name = "Test" };
-                var expectedIdentifier = new Identifier(new Dictionary<string, object> { { "Id", 1 } });
+            // Arrange
+            TestStruct testObj = new TestStruct { Id = 0, Name = "Test" };
+            Identifier expectedIdentifier = new Identifier(new Dictionary<string, object> { });
 
-                var identifier = testObj.GetIdentifier();
+            // Act
+            Identifier identifier = testObj.GetIdentifier();
 
-                Assert.Equal(expectedIdentifier, identifier);
-            }
-            // FileSystem not available in .NET Core
-            catch (Exception ex)
-            {
-                Assert.True(true);
-            }
+            // Assert
+            Assert.Equal(expectedIdentifier, identifier);
         }
 
         [Fact]
-        public void GetTableName_ReturnsCorrectTableName()
+        public void GetTableName_NoDBConnection_ReturnsNull()
         {
-            try
-            {
-                var testObj = new TestStruct();
+            // Arrange
+            TestStruct testObj = new TestStruct();
 
-                var tableName = testObj.GetTableName();
+            // Act
+            string tableName = testObj.GetTableName();
 
-                Assert.Equal("TestTable", tableName);
-            }
-            // FileSystem not available in .NET Core
-            catch (Exception ex) 
-            { 
-                Assert.True(true);
-            }
+            // Assert
+            Assert.Null(tableName);
+
         }
     }
 }

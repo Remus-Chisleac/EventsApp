@@ -13,12 +13,13 @@ namespace EventsAppTests_XUnitTest.CSVAdapters
             string filePath = "testFilePath";
             try
             {
-                var csvAdapter = new CSVAdapter<int>(filePath);
+                CSVAdapter<int> csvAdapter = new CSVAdapter<int>(filePath);
 
                 Assert.Equal(filePath, csvAdapter.GetPath());
             }
             catch (Exception e)
             {
+                // FileSystem not available in .NET Core
                 Assert.True(true);
             }
         }
@@ -29,7 +30,7 @@ namespace EventsAppTests_XUnitTest.CSVAdapters
             string filePath = "testFilePath";
             try
             {
-                var csvAdapter = new CSVAdapter<int>(filePath);
+                CSVAdapter<int> csvAdapter = new CSVAdapter<int>(filePath);
                 int itemToAdd = 10;
 
                 csvAdapter.Add(itemToAdd);
@@ -38,6 +39,7 @@ namespace EventsAppTests_XUnitTest.CSVAdapters
             }
             catch (Exception e)
             {
+                // FileSystem not available in .NET Core
                 Assert.True(true);
             }
         }

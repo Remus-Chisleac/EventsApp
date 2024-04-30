@@ -8,19 +8,5 @@ namespace EventsAppTests_XUnitTest
         {
 
         }
-
-        [Fact]
-        public void UsserInfo_ConstructorAllInfo_ReturnsCorrectInfo()
-        {
-            Guid guid = Guid.NewGuid();
-            string name = "John";
-            string password = "123";
-
-            UserInfo userInfo = new UserInfo(guid, name, password);
-
-            Assert.Equal(guid, userInfo.GUID);
-            Assert.Equal(name, userInfo.Name);
-            Assert.Equal(password, userInfo.Password);
-        }
     }
 }

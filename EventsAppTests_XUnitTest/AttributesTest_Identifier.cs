@@ -11,15 +11,15 @@ namespace EventsAppTests_XUnitTest
     {
         public void Identifier_Constructor_Test(Dictionary<string, object> inputValues)
         {
-            var identifier = new Identifier(inputValues);
+            Identifier identifier = new Identifier(inputValues);
 
             Assert.Equal(inputValues, identifier.PrimaryKeys);
         }
         public void Identifier_Equals_Test(Dictionary<string, object> inputValues)
         {
-            var twinIdentifier1 = new Identifier(inputValues);
+            Identifier twinIdentifier1 = new Identifier(inputValues);
 
-            var twinIdentifier2 = new Identifier(inputValues);
+            Identifier twinIdentifier2 = new Identifier(inputValues);
 
             Assert.True(twinIdentifier1.Equals(twinIdentifier2));
         }

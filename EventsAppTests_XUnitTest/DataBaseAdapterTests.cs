@@ -15,7 +15,7 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
         [Fact]
         public void DataBaseAdapter_Constructor_SetsConnectionString()
         {
-            var dataBaseAdapter = new DataBaseAdapter<int>(connectionString);
+            DataBaseAdapter<int> dataBaseAdapter = new DataBaseAdapter<int>(connectionString);
 
             string actualConnectionString = dataBaseAdapter.ConnectionString();
 
@@ -25,8 +25,8 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
         [Fact]
         public void DataBaseAdapter_Add_CorrectlyAddsItem()
         {
-            var dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
-            var eventInfo = new EventInfo
+            DataBaseAdapter<EventInfo> dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
+            EventInfo eventInfo = new EventInfo
             {
                 GUID = Guid.NewGuid(),
                 OrganizerGUID = Guid.NewGuid(),
@@ -47,15 +47,15 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
             EventInfo Expected_return = new EventInfo(Guid.Empty);
             dataBaseAdapter.Add(eventInfo);
 
-            var retrievedEventInfo = dataBaseAdapter.Get(new Identifier(new Dictionary<string, object> { { "GUID", eventInfo.GUID } }));
+            EventInfo retrievedEventInfo = dataBaseAdapter.Get(new Identifier(new Dictionary<string, object> { { "GUID", eventInfo.GUID } }));
             Assert.Null(retrievedEventInfo.EventName);
         }
 
         [Fact]
         public void DataBaseAdapter_Clear_ClearsAllItems()
         {
-            var dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
-            var eventInfo = new EventInfo
+            DataBaseAdapter<EventInfo> dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
+            EventInfo eventInfo = new EventInfo
             {
                 GUID = Guid.NewGuid(),
                 OrganizerGUID = Guid.NewGuid(),
@@ -75,7 +75,7 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
 
             dataBaseAdapter.Clear();
 
-            var allEvents = dataBaseAdapter.GetAll();
+            List<EventInfo> allEvents = dataBaseAdapter.GetAll();
             Assert.Empty(allEvents);
         }
 
