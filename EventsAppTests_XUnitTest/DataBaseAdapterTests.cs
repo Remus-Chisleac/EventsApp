@@ -15,20 +15,16 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
         [Fact]
         public void DataBaseAdapter_Constructor_SetsConnectionString()
         {
-            // Arrange
             var dataBaseAdapter = new DataBaseAdapter<int>(connectionString);
 
-            // Act
             string actualConnectionString = dataBaseAdapter.ConnectionString();
 
-            // Assert
             Assert.Equal(connectionString, actualConnectionString);
         }
 
         [Fact]
         public void DataBaseAdapter_Add_CorrectlyAddsItem()
         {
-            // Arrange
             var dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
             var eventInfo = new EventInfo
             {
@@ -47,10 +43,8 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
                 EntryFee = 0.0f
             };
 
-            // Act
             dataBaseAdapter.Add(eventInfo);
 
-            // Assert
             var retrievedEventInfo = dataBaseAdapter.Get(new Identifier(new Dictionary<string, object> { { "GUID", eventInfo.GUID } }));
             Assert.NotNull(retrievedEventInfo);
             Assert.Equal(eventInfo, retrievedEventInfo);
@@ -59,7 +53,6 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
         [Fact]
         public void DataBaseAdapter_Clear_ClearsAllItems()
         {
-            // Arrange
             var dataBaseAdapter = new DataBaseAdapter<EventInfo>(connectionString);
             var eventInfo = new EventInfo
             {
@@ -79,15 +72,12 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
             };
             dataBaseAdapter.Add(eventInfo);
 
-            // Act
             dataBaseAdapter.Clear();
 
-            // Assert
             var allEvents = dataBaseAdapter.GetAll();
             Assert.Empty(allEvents);
         }
 
-        // Add more test methods for Contains, Delete, Get, GetAll, and Update
 
     }
 }
