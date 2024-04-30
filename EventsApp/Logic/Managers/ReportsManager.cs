@@ -58,7 +58,6 @@
             return reportInfos;
         }
 
-
         public static void AddReport(Guid userId, Guid eventId, ReportInfo.ReportType reportType)
         {
             ReportInfo reportInfo = new ReportInfo(userId, eventId, reportType);

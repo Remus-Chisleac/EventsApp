@@ -8,7 +8,6 @@ public partial class OrganizerInvitePage : ContentPage
 	}
     private void CloseButton_Clicked(object sender, EventArgs e)
     {
-        
     }
 }	*/
 
@@ -29,9 +28,9 @@ namespace EventsApp
             // Initialize the Users collection with some sample data
             this.Users = new ObservableCollection<User>
             {
-                new User ( "User1","circle1.jpeg" ),
-                new User ("User2","circle1.jpeg" ),
-                new User (  "User3","circle1.jpeg" ),
+                new User("User1", "circle1.jpeg"),
+                new User("User2", "circle1.jpeg"),
+                new User("User3", "circle1.jpeg"),
             };
 
             // Set the BindingContext of the page to itself
@@ -49,8 +48,6 @@ namespace EventsApp
 
         private void InviteButton_Clicked(object sender, EventArgs e)
         {
-
         }
-
     }
 }

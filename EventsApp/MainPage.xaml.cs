@@ -12,10 +12,10 @@
 
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-        Label label;
-        DateTime date = DateTime.Now;
-        string formattedDate;
+        public int Count = 0;
+        public Label Label;
+        public DateTime Date = DateTime.Now;
+        public string FormattedDate;
 
         public ObservableCollection<Event> Events
         {
@@ -63,7 +63,7 @@
         public MainPage()
         {
             this.InitializeComponent();
-            this.formattedDate = this.date.ToString("dddd, d MMM, hh:mm tt");
+            this.FormattedDate = this.Date.ToString("dddd, d MMM, hh:mm tt");
             /*
             Events = new ObservableCollection<Event>
             {
@@ -88,14 +88,13 @@
 
         private void RefreshAllEvents()
         {
-
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             this.RefreshEvents();
-            //RefreshInterestedStars();
+            // RefreshInterestedStars();
         }
 
         public void OnSortChanged(object sender, EventArgs e)
@@ -116,7 +115,7 @@
         }
 
         #region Event Handlers
-        async void OnEventClicked(object sender, EventArgs e)
+        public async void OnEventClicked(object sender, EventArgs e)
         {
             string guid = string.Empty;
             Grid imageSender = (Grid)sender;
@@ -129,7 +128,7 @@
             await this.Navigation.PushAsync(new EventPageUser(guid));
         }
 
-        void OnImageButtonClicked(object sender, EventArgs e)
+        public void OnImageButtonClicked(object sender, EventArgs e)
         {
             Shell.Current.Navigation.PushAsync(new AddOrEditPage(AppStateManager.CurrentUserGUID, Guid.Empty, false));
         }
@@ -144,7 +143,7 @@
                 "Result 3 for " + searchText,
             };
             this.SearchResultsListView.ItemsSource = searchResults;
-            this.SearchResultsListView.IsVisible = !string.IsNullOrEmpty(searchText); ;
+            this.SearchResultsListView.IsVisible = !string.IsNullOrEmpty(searchText);
         }
 
         private void OnFilterClicked(object sender, EventArgs e)

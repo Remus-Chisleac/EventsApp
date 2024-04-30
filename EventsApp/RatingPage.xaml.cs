@@ -15,14 +15,14 @@ public partial class RatingPage : ContentPage
         this.Navigation.PopModalAsync();
     }
 
-    void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+    public void OnEntryTextChanged(object sender, TextChangedEventArgs e)
     {
         string oldText = e.OldTextValue;
         string newText = e.NewTextValue;
         string myText = this.entry.Text;
     }
 
-    void OnEntryCompleted(object sender, EventArgs e)
+    public void OnEntryCompleted(object sender, EventArgs e)
     {
         string text = ((Entry)sender).Text;
     }
@@ -39,6 +39,4 @@ public partial class RatingPage : ContentPage
             star.Source = "yellow_star.png";
         }
     }
-
-
 }

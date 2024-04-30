@@ -8,7 +8,11 @@ public partial class BuyTicketAndDonatePage : ContentPage
     private Action onPaymentReceived;
     private PaymentMethod paymentMethod;
 
-    public enum PaymentMethod { Ticket, Donation };
+    public enum PaymentMethod
+    {
+        Ticket,
+        Donation
+    }
 
     public BuyTicketAndDonatePage(Guid eventGUID, Action onPaymentReceived, PaymentMethod paymentMethod)
     {
@@ -20,7 +24,6 @@ public partial class BuyTicketAndDonatePage : ContentPage
 
     private void BackImageButton_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void PayForTicket()

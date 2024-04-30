@@ -1,16 +1,15 @@
-namespace EventsAppTests
+namespace EventsAppTests_XUnitTest
 {
     using EventsApp.Logic.Entities;
-    public class Tests
+    public class UnitTest1
     {
-
-        [Test]
+        [Fact]
         public void Test1()
         {
-            Assert.Pass();
+
         }
 
-        [Test]
+        [Fact]
         public void UsserInfo_ConstructorAllInfo_ReturnsCorrectInfo()
         {
             Guid guid = Guid.NewGuid();
@@ -19,9 +18,9 @@ namespace EventsAppTests
 
             UserInfo userInfo = new UserInfo(guid, name, password);
 
-            Assert.That(guid, Is.EqualTo(userInfo.GUID));
-            Assert.That(name, Is.EqualTo(userInfo.Name));
-            Assert.That(password, Is.EqualTo(userInfo.Password));
+            Assert.Equal(guid, userInfo.GUID);
+            Assert.Equal(name, userInfo.Name);
+            Assert.Equal(password, userInfo.Password);
         }
     }
 }
