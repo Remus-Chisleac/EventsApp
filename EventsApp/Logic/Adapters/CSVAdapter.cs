@@ -16,11 +16,15 @@
     {
         private string filePath = AppDataInfo.ValidatePath(filePath); // CSV file path
 
+        public string GetPath()
+        {
+            return filePath;
+        }
+
         public override void Connect()
         {
             // No connection needed
         }
-
         public override void Clear()
         {
             try
