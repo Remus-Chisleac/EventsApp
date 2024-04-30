@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventsAppTests_XUnitTest
 {
-    internal class AttributesTest_Identifier
+    public class AttributesTest_Identifier
     {
         public void Identifier_Constructor_Test(Dictionary<string, object> inputValues)
         {
