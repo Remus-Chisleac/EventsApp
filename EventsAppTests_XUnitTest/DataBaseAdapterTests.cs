@@ -81,4 +81,3 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
 
     }
 }
-
