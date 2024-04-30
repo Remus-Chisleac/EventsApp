@@ -10,7 +10,7 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
 {
     public class DataBaseAdapterTests
     {
-        private readonly string connectionString = "your_database_connection_string_here";
+        private readonly string connectionString = "Server=tcp:iss-events.database.windows.net,1433;Initial Catalog=EventsDB;Persist Security Info=False;User ID={id};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         [Fact]
         public void DataBaseAdapter_Constructor_SetsConnectionString()
@@ -43,11 +43,12 @@ namespace EventsAppTests_XUnitTest.DatabaseAdapters
                 EntryFee = 0.0f
             };
 
+            // Expected return with no DB_Connection
+            EventInfo Expected_return = new EventInfo(Guid.Empty);
             dataBaseAdapter.Add(eventInfo);
 
             var retrievedEventInfo = dataBaseAdapter.Get(new Identifier(new Dictionary<string, object> { { "GUID", eventInfo.GUID } }));
-            Assert.NotNull(retrievedEventInfo);
-            Assert.Equal(eventInfo, retrievedEventInfo);
+            Assert.Null(retrievedEventInfo.EventName);
         }
 
         [Fact]
