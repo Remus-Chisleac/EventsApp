@@ -16,10 +16,10 @@
         public static void Initialize()
         {
             // Setting up connections
-            //CSVAdapter<UserInfo> usersCSVAdapter = new CSVAdapter<UserInfo>("UsersCSV");
-            //CSVAdapter<Entities.EventInfo> eventsCSVAdapter = new CSVAdapter<Entities.EventInfo>("EventsCSV");
-            //usersCSVAdapter.Connect();
-            //eventsCSVAdapter.Connect();
+            // CSVAdapter<UserInfo> usersCSVAdapter = new CSVAdapter<UserInfo>("UsersCSV");
+            // CSVAdapter<Entities.EventInfo> eventsCSVAdapter = new CSVAdapter<Entities.EventInfo>("EventsCSV");
+            // usersCSVAdapter.Connect();
+            // eventsCSVAdapter.Connect();
             bool regenerateDB = false;
 
             SetupDB(true, true, regenerateDB);
@@ -165,7 +165,6 @@
                     columns.Add(primaryKeyString);
 
                     string createTableQuery = $"CREATE TABLE {tableName} ({string.Join(", ", columns)})";
-
 
                     using (SqlConnection connection = new SqlConnection(ConnectionString))
                     {

@@ -5,8 +5,8 @@ namespace EventsApp;
 
 public partial class EventPageUser : ContentPage
 {
-    string eventGuid;
-    bool isOrganizerMode = false;
+    public string EventGuid;
+    public bool IsOrganizerMode = false;
 
     public Event Event { get; set; }
 
@@ -14,11 +14,11 @@ public partial class EventPageUser : ContentPage
     {
         this.InitializeComponent();
 
-        this.eventGuid = guid;
+        this.EventGuid = guid;
         this.Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)));
         this.BindingContext = this;
 
-        this.isOrganizerMode = EventsManager.IsOrganizer(AppStateManager.CurrentUserGUID, Guid.Parse(guid));
+        this.IsOrganizerMode = EventsManager.IsOrganizer(AppStateManager.CurrentUserGUID, Guid.Parse(guid));
 
         this.UpdateProperties();
         this.UpdateInterestedStatus();
@@ -29,24 +29,24 @@ public partial class EventPageUser : ContentPage
     {
         base.OnAppearing();
         this.RefreshEvent();
-        //RefreshInterestedStars();
+        // RefreshInterestedStars();
     }
 
     private void RefreshEvent()
     {
-        this.Event = new Event(EventsManager.GetEvent(Guid.Parse(this.eventGuid)));
+        this.Event = new Event(EventsManager.GetEvent(Guid.Parse(this.EventGuid)));
         this.BindingContext = this;
         this.OnPropertyChanged(nameof(this.Event));
     }
 
     private void UpdateProperties()
     {
-        this.buyTicketButton.Text = this.isOrganizerMode ? "Edit Event" : "Buy Ticket";
+        this.buyTicketButton.Text = this.IsOrganizerMode ? "Edit Event" : "Buy Ticket";
     }
 
     private void UpdateInterestedStatus()
     {
-        if (UsersManager.IsInterested(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid)))
+        if (UsersManager.IsInterested(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid)))
         {
             this.interestedImageButton.Source = "star_filled.png";
         }
@@ -79,7 +79,7 @@ public partial class EventPageUser : ContentPage
 
     private void UpdateGoingStatus()
     {
-        if (UsersManager.IsGoing(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid)))
+        if (UsersManager.IsGoing(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid)))
         {
             this.goingImageButton.BackgroundColor = Color.FromHex("#FFD700");
         }
@@ -91,13 +91,13 @@ public partial class EventPageUser : ContentPage
 
     private void InterestedImageButton_Clicked(object sender, EventArgs e)
     {
-        if (UsersManager.IsInterested(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid)))
+        if (UsersManager.IsInterested(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid)))
         {
-            UsersManager.RemoveInterestedStatus(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid));
+            UsersManager.RemoveInterestedStatus(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid));
         }
         else
         {
-            UsersManager.SetInterestedStatus(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid));
+            UsersManager.SetInterestedStatus(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid));
         }
 
         this.UpdateInterestedStatus();
@@ -110,7 +110,7 @@ public partial class EventPageUser : ContentPage
             return;
         }
 
-        if (this.isOrganizerMode)
+        if (this.IsOrganizerMode)
         {
             this.Navigation.PushAsync(new AddOrEditPage(AppStateManager.CurrentUserGUID, Guid.Parse(this.Event.GUID), true));
         }
@@ -119,22 +119,20 @@ public partial class EventPageUser : ContentPage
             this.Navigation.PushAsync(new BuyTicketAndDonatePage(Guid.Parse(this.Event.GUID), () => this.OnTickedPaymentReceived(), BuyTicketAndDonatePage.PaymentMethod.Ticket));
         }
 
-
         this.UpdateGoingStatus();
     }
 
     private void ShareImageButton_Clicked(object sender, EventArgs e)
     {
-        this.Navigation.PushAsync(new UserSharePage(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid)));
+        this.Navigation.PushAsync(new UserSharePage(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid)));
     }
 
     private void ReportImageButton_Clicked(object sender, EventArgs e)
     {
-        this.Navigation.PushAsync(new ReportPage(AppStateManager.CurrentUserGUID, Guid.Parse(this.eventGuid)));
+        this.Navigation.PushAsync(new ReportPage(AppStateManager.CurrentUserGUID, Guid.Parse(this.EventGuid)));
     }
 
     private void BackImageButton_Clicked(object sender, EventArgs e)
     {
-
     }
 }

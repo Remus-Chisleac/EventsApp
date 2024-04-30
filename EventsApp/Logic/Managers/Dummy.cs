@@ -19,18 +19,16 @@
             PopulateUsers(10);
             PopulateEvents(10);
             PopulateStatuses();
-            //List<UserInfo> users = UsersManager.GetAllUsers();
-            //List<EventInfo> events = EventsManager.GetAllEvents();
+            // List<UserInfo> users = UsersManager.GetAllUsers();
+            // List<EventInfo> events = EventsManager.GetAllEvents();
         }
 
         public static void AddCurrentlyLoggedUser()
         {
-            UserInfo currentUser = new UserInfo
-            (
+            UserInfo currentUser = new UserInfo(
                 AppStateManager.CurrentUserGUID,
                 AppStateManager.Name,
-                AppStateManager.Password
-            );
+                AppStateManager.Password);
 
             UsersManager.AddNewUser(currentUser);
         }
@@ -77,8 +75,7 @@
             // logoUrl, ageLimit, entryFee
             Faker faker = new Faker();
 
-            EventInfo eventInfo = new EventInfo
-            (
+            EventInfo eventInfo = new EventInfo(
                 organizerGuid,
                 faker.Company.CompanyName(),
                 faker.Commerce.Categories(1)[0],
@@ -90,8 +87,7 @@
                 faker.Image.PicsumUrl(),
                 faker.Image.PicsumUrl(),
                 faker.Random.Int(1, 100),
-                faker.Random.Int(0, 100)
-            );
+                faker.Random.Int(0, 100));
 
             return eventInfo;
         }

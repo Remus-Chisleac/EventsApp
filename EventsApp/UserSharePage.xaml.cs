@@ -39,6 +39,5 @@ public partial class UserSharePage : ContentPage
 
     private void InviteButton_Clicked(object sender, EventArgs e)
     {
-
     }
 }

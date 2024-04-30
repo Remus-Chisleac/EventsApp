@@ -94,11 +94,9 @@
 
         public static List<EventInfo> FilterEvents(EventFilter filter)
         {
-
             List<EventInfo> allEvents = GetAllEvents();
             // If something is null ignore that filter
             // Ex: If name is "" ignore the name filter
-
             List<EventInfo> filteredEvents = new List<EventInfo>();
             if (filter.Name != null)
             {
@@ -197,10 +195,12 @@
             List<EventInfo> events = GetAllEvents();
             List<EventInfo> eventsForUser = new List<EventInfo>();
             foreach (EventInfo eventInfo in events)
+            {
                 if (eventInfo.OrganizerGUID == userId)
                 {
                     eventsForUser.Add(eventInfo);
                 }
+            }
 
             return eventsForUser;
         }

@@ -62,7 +62,6 @@
             return foundUsers;
         }
 
-
         public static void SendNotificationToUser(Guid userInvitedId, string message)
         {
             // not implemented by us
