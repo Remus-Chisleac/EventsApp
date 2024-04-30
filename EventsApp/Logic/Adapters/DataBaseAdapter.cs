@@ -17,6 +17,11 @@
 
         private string TableName => typeof(T).GetCustomAttributes(typeof(TableAttribute), true).Cast<TableAttribute>().FirstOrDefault().TableName;
 
+        public string ConnectionString()
+        {
+            return connectionString;
+        }
+
         public override void Add(T item)
         {
             string fields = this.GetFields();
