@@ -23,26 +23,21 @@ public partial class EventPageOrganizerSponsor : ContentPage
 
     private void InviteButton_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void BackButton_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void ReportsImageButton_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void EditImageButton_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void ReviewsImageButton_Clicked(object sender, EventArgs e)
     {
-
     }
 }

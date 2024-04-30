@@ -79,7 +79,6 @@
             return reviews;
         }
 
-
         public static float GetReviewsAverageScoreOfUser(Guid userId)
         {
             List<ReviewInfo> userReviews = GetAllReviewsOfUser(userId);
