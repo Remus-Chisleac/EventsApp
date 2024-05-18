@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventsAppTests_XUnitTest
+namespace EventsAppTests_XUnitTest.Entities
 {
     using EventsApp.Logic.Entities;
     public class EntitiesTest_EventInfo

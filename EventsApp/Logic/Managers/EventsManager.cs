@@ -94,13 +94,12 @@
 
         public static List<EventInfo> FilterEvents(EventFilter filter)
         {
-            List<EventInfo> allEvents = GetAllEvents();
+            List<EventInfo> filteredEvents = GetAllEvents();
             // If something is null ignore that filter
             // Ex: If name is "" ignore the name filter
-            List<EventInfo> filteredEvents = new List<EventInfo>();
             if (filter.Name != null)
             {
-                filteredEvents = allEvents.FindAll(c => c.EventName.ToLower().Contains(filter.Name.ToLower()));
+                filteredEvents = filteredEvents.FindAll(c => c.EventName.ToLower().Contains(filter.Name.ToLower()));
             }
 
             if (filter.MaxFee != 0)
@@ -279,12 +278,11 @@
             string correctCvv = cvv; // get this from database
             DateTime correctExpirationDate = expirationDate; // get this from database
             return true;
-            if (correctExpirationDate.Date < DateTime.Now.Date || correctCardHolderName != cardHolderName || correctCardNumber != cardNumber || correctCvv != cvv || correctExpirationDate.Date != expirationDate.Date)
-            {
-                return false;
-            }
-
-            return true;
+            // if (correctExpirationDate.Date < DateTime.Now.Date || correctCardHolderName != cardHolderName || correctCardNumber != cardNumber || correctCvv != cvv || correctExpirationDate.Date != expirationDate.Date)
+            // {
+            //    return false;
+            // }
+            // return true;
         }
 
         public static void BuyTicket(Guid userId, Guid eventId, string cardHolderName, string cardNumber, string cvv, DateTime expirationDate)

@@ -10,7 +10,7 @@
     using EventsApp.Logic.Entities;
     using EventsApp.Logic.Managers;
 
-    public class Event : INotifyPropertyChanged
+    public class EventView : INotifyPropertyChanged
     {
         private bool interested;
 
@@ -34,7 +34,7 @@
 
         public int NoOfParticipants { get; set; }
 
-        public Event(string gUID, string picture, string organizer, string name, string description, string location, string date, string price, int participants)
+        public EventView(string gUID, string picture, string organizer, string name, string description, string location, string date, string price, int participants)
         {
             this.GUID = gUID;
             this.Picture = picture;
@@ -47,7 +47,7 @@
             this.NoOfParticipants = participants;
         }
 
-        public Event(EventInfo eventInfo)
+        public EventView(EventInfo eventInfo)
         {
             this.GUID = eventInfo.GUID.ToString();
             this.Picture = eventInfo.BannerURL;

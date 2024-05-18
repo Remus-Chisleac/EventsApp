@@ -43,9 +43,15 @@
             return donationsForEvent;
         }
 
-        public static void AddDonation(Guid userId, Guid eventId, float amount)
+        public static Guid AddDonation(Guid userId, Guid eventId, float amount)
         {
-            DonationInfo donationInfo = new DonationInfo(userId, eventId, amount);
+            DonationInfo donationInfo = new DonationInfo(eventId, userId, amount);
+            adapter.Add(donationInfo);
+            return donationInfo.GUID;
+        }
+
+        public static void AddDonation(DonationInfo donationInfo)
+        {
             adapter.Add(donationInfo);
         }
 

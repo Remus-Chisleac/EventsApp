@@ -19,7 +19,6 @@ namespace EventsAppTests_XUnitTest
             Assert.Equal(CurrentUserGUID, AppStateManager.CurrentUserGUID);
             Assert.Equal(Name, AppStateManager.Name);
             Assert.Equal(Password, AppStateManager.Password);
-
         }
     }
 }

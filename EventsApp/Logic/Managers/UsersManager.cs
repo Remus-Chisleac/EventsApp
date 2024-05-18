@@ -72,10 +72,11 @@
             usersAdapter.Add(user);
         }
 
-        public static void AddNewUser(string name, string password)
+        public static Guid AddNewUser(string name, string password)
         {
             UserInfo userInfo = new UserInfo(name, password);
             usersAdapter.Add(userInfo);
+            return userInfo.GUID;
         }
 
         public static void InviteUser(Guid userId, Guid eventId, Guid userInvitedId)
@@ -145,6 +146,12 @@
             }
 
             return userEventRelationsAdapter.Get(userEventRelationInfo.GetIdentifier()).Status == "going";
+        }
+
+        public static void DeleteUser(Guid userId)
+        {
+            UserInfo user = GetUser(userId);
+            usersAdapter.Delete(user.GetIdentifier());
         }
     }
 }

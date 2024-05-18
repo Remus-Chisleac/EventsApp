@@ -120,6 +120,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="GUI\" />
 		<Folder Include="Logic\GUI\" />
 		<Folder Include="Storage\" />
 	</ItemGroup>

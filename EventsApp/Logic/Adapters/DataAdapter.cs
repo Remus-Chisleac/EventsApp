@@ -15,8 +15,6 @@
     {
         private string key = key;
 
-        public abstract void Connect();
-
         public abstract void Clear();
 
         public abstract void Add(T item);

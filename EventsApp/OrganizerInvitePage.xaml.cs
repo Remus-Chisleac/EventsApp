@@ -19,18 +19,18 @@ namespace EventsApp
 
     public partial class OrganizerInvitePage : ContentPage
     {
-        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<UserUi> Users { get; set; }
 
         public OrganizerInvitePage()
         {
             this.InitializeComponent();
 
             // Initialize the Users collection with some sample data
-            this.Users = new ObservableCollection<User>
+            this.Users = new ObservableCollection<UserUi>
             {
-                new User("User1", "circle1.jpeg"),
-                new User("User2", "circle1.jpeg"),
-                new User("User3", "circle1.jpeg"),
+                new UserUi("User1", "circle1.jpeg"),
+                new UserUi("User2", "circle1.jpeg"),
+                new UserUi("User3", "circle1.jpeg"),
             };
 
             // Set the BindingContext of the page to itself

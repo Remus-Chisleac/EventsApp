@@ -9,7 +9,6 @@
     using EventsApp.Logic.Managers;
     using EventsApp.Model_View.Entities;
     using Microsoft.Maui.Controls;
-
     public partial class MainPage : ContentPage
     {
         public int Count = 0;
@@ -17,13 +16,13 @@
         public DateTime Date = DateTime.Now;
         public string FormattedDate;
 
-        public ObservableCollection<Event> Events
+        public ObservableCollection<EventView> Events
         {
             get;
             set;
         }
 
-        private ObservableCollection<Event> GetEvents(string sortOptions = null)
+        private ObservableCollection<EventView> GetEvents(string sortOptions = null)
         {
             List<EventInfo> eventInfos = new List<EventInfo>();
 
@@ -46,11 +45,11 @@
                     break;
             }
 
-            ObservableCollection<Event> events = new ObservableCollection<Event>();
+            ObservableCollection<EventView> events = new ObservableCollection<EventView>();
 
             foreach (EventInfo eventInfo in eventInfos)
             {
-                Event newEvent = new Event(eventInfo);
+                EventView newEvent = new EventView(eventInfo);
                 events.Add(newEvent);
                 newEvent.UpdateInterestedStatus();
                 this.OnPropertyChanged(nameof(newEvent.InterestedStar));
@@ -76,7 +75,7 @@
 
         private void RefreshInterestedStars()
         {
-            foreach (Event ev in this.Events)
+            foreach (EventView ev in this.Events)
             {
                 ev.UpdateInterestedStatus();
                 this.OnPropertyChanged(nameof(ev.InterestedStar));
@@ -154,7 +153,7 @@
         private void OnStarTapped(object sender, EventArgs e)
         {
             Image tappedStar = (Image)sender;
-            Event tappedEvent = (Event)tappedStar.BindingContext;
+            EventView tappedEvent = (EventView)tappedStar.BindingContext;
 
             if (!UsersManager.IsInterested(AppStateManager.CurrentUserGUID, Guid.Parse(tappedEvent.GUID)))
             {

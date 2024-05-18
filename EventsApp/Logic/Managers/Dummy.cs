@@ -109,10 +109,5 @@
         {
             return UsersManager.GetAllUsers()[Random.Next(UsersManager.GetAllUsers().Count)].GUID;
         }
-
-        public static Guid GetRandomEventGUID()
-        {
-            return EventsManager.GetAllEvents()[Random.Next(EventsManager.GetAllEvents().Count)].GUID;
-        }
     }
 }

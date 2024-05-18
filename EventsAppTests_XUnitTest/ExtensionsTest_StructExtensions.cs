@@ -3,33 +3,46 @@ using EventsApp.Logic.Attributes;
 using EventsApp.Logic.Extensions;
 using System;
 using System.Collections.Generic;
+using EventsApp.Logic.Entities;
 
-namespace EventsAppTests_XUnitTest
+namespace EventsAppTests_XUnitTest.StructExtensions
 {
     public class ExtensionsTest_StructExtensions
     {
 
+        [Table("TestTable")]
+        [System.Serializable]
         public struct TestStruct
         {
             [PrimaryKey]
-            public int Id { get; set; }
-
-            [Table("TestTable")]
+            public Guid Id { get; set; }
             public string Name { get; set; }
+
+            public TestStruct(Guid id, string name)
+            {
+                this.Id = id;
+                this.Name = name;
+            }
+
+            public TestStruct()
+            {
+                this.Id = Guid.NewGuid();
+                this.Name = string.Empty;
+            }
         }
 
         [Fact]
         public void GetIdentifier_NoDBConnection_ReturnsCorrectIdentifier()
         {
             // Arrange
-            TestStruct testObj = new TestStruct { Id = 0, Name = "Test" };
-            Identifier expectedIdentifier = new Identifier(new Dictionary<string, object> { });
+            UserInfo testObj = new UserInfo {};
+            Identifier Expected = new Identifier(new Dictionary<string, object> { {"GUID", testObj.GUID }});
 
             // Act
-            Identifier identifier = testObj.GetIdentifier();
+            Identifier Actual = testObj.GetIdentifier();
 
             // Assert
-            Assert.Equal(expectedIdentifier, identifier);
+            Assert.Equal(Expected, Actual);
         }
 
         [Fact]
@@ -37,12 +50,13 @@ namespace EventsAppTests_XUnitTest
         {
             // Arrange
             TestStruct testObj = new TestStruct();
+            string Expected = "TestTable";
 
             // Act
-            string tableName = testObj.GetTableName();
+            string Actual = testObj.GetTableName();
 
             // Assert
-            Assert.Null(tableName);
+            Assert.Equal(Expected, Actual);
 
         }
     }

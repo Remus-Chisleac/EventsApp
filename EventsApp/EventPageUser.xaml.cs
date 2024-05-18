@@ -8,14 +8,14 @@ public partial class EventPageUser : ContentPage
     public string EventGuid;
     public bool IsOrganizerMode = false;
 
-    public Event Event { get; set; }
+    public EventView Event { get; set; }
 
     public EventPageUser(string guid)
     {
         this.InitializeComponent();
 
         this.EventGuid = guid;
-        this.Event = new Event(EventsManager.GetEvent(Guid.Parse(guid)));
+        this.Event = new EventView(EventsManager.GetEvent(Guid.Parse(guid)));
         this.BindingContext = this;
 
         this.IsOrganizerMode = EventsManager.IsOrganizer(AppStateManager.CurrentUserGUID, Guid.Parse(guid));
@@ -34,7 +34,7 @@ public partial class EventPageUser : ContentPage
 
     private void RefreshEvent()
     {
-        this.Event = new Event(EventsManager.GetEvent(Guid.Parse(this.EventGuid)));
+        this.Event = new EventView(EventsManager.GetEvent(Guid.Parse(this.EventGuid)));
         this.BindingContext = this;
         this.OnPropertyChanged(nameof(this.Event));
     }

@@ -9,7 +9,7 @@ public partial class UserSharePage : ContentPage
     private Guid userGuid;
     private Guid eventGuid;
 
-    public ObservableCollection<User> Users { get; set; }
+    public ObservableCollection<UserUi> Users { get; set; }
 
     public UserSharePage(Guid userGUID, Guid eventGUID)
     {
@@ -20,13 +20,13 @@ public partial class UserSharePage : ContentPage
         this.BindingContext = this;
     }
 
-    private ObservableCollection<User> GetUsers()
+    private ObservableCollection<UserUi> GetUsers()
     {
         List<UserInfo> users = UsersManager.GetAllUsers();
-        ObservableCollection<User> usersList = new ObservableCollection<User>();
+        ObservableCollection<UserUi> usersList = new ObservableCollection<UserUi>();
         foreach (UserInfo user in users)
         {
-            usersList.Add(new User(user.Name, "circle1.jpeg"));
+            usersList.Add(new UserUi(user.Name, "circle1.jpeg"));
         }
 
         return usersList;

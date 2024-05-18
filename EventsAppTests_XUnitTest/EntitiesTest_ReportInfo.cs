@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventsAppTests_XUnitTest
+namespace EventsAppTests_XUnitTest.Entities
 {
     using EventsApp.Logic.Entities;
     public class EntitiesTest_ReportInfo
@@ -33,6 +33,21 @@ namespace EventsAppTests_XUnitTest
             Assert.Equal(GenerateAndExpected_userGuid, reportInfo.UserGUID);
             Assert.Equal(GenerateAndExpected_eventGuid, reportInfo.EventGUID);
             Assert.Equal(GenerateAndExpected_reportType, reportInfo.ReportTypeValue);
+        }
+
+        [Fact]
+        public void ReportInfo_ConstructorNoReportType_ReturnsCorrectInfo()
+        {
+            Guid GenerateAndExpected_userGuid = Guid.NewGuid();
+            Guid GenerateAndExpected_eventGuid = Guid.NewGuid();
+
+            ReportInfo reportInfo = new ReportInfo(
+                                              GenerateAndExpected_userGuid,
+                                                                            GenerateAndExpected_eventGuid);
+
+            Assert.Equal(GenerateAndExpected_userGuid, reportInfo.UserGUID);
+            Assert.Equal(GenerateAndExpected_eventGuid, reportInfo.EventGUID);
+            Assert.Equal(ReportInfo.ReportType.Harassment, reportInfo.ReportTypeValue);
         }
     }
 }

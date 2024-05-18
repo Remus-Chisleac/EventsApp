@@ -1,6 +1,6 @@
 ﻿namespace EventsApp
 {
-    public class User(string username, string profilePicture)
+    public class UserUi(string username, string profilePicture)
     {
         public string Username { get; set; } = username;
 

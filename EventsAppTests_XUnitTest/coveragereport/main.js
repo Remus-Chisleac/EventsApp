@@ -221,19 +221,9 @@ var assemblies = [
   {
     "name": "EventsApp",
     "classes": [
-      { "name": "__XamlGeneratedCode__.__Type43B3418D706F2D1C", "rp": "EventsApp___Type43B3418D706F2D1C.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 32, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "__XamlGeneratedCode__.__Type740AEB7566F19982", "rp": "EventsApp___Type740AEB7566F19982.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 32, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.AddOrEditPage", "rp": "EventsApp_AddOrEditPage.html", "cl": 0, "ucl": 185, "cal": 185, "tl": 338, "cb": 0, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.App", "rp": "EventsApp_App.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.AppShell", "rp": "EventsApp_AppShell.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.BuyTicketAndDonatePage", "rp": "EventsApp_BuyTicketAndDonatePage.html", "cl": 0, "ucl": 34, "cal": 34, "tl": 82, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.EventInfoPage", "rp": "EventsApp_EventInfoPage.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 40, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.EventPageOrganizerSponsor", "rp": "EventsApp_EventPageOrganizerSponsor.html", "cl": 0, "ucl": 47, "cal": 47, "tl": 157, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.EventPageUser", "rp": "EventsApp_EventPageUser.html", "cl": 0, "ucl": 112, "cal": 112, "tl": 267, "cb": 0, "tb": 14, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Adapters.CSVAdapter<T>", "rp": "EventsApp_CSVAdapter_1.html", "cl": 1, "ucl": 124, "cal": 125, "tl": 195, "cb": 0, "tb": 32, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Adapters.DataAdapter<T>", "rp": "EventsApp_DataAdapter_1.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "rp": "EventsApp_DataBaseAdapter_1.html", "cl": 187, "ucl": 89, "cal": 276, "tl": 366, "cb": 36, "tb": 74, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Attributes.Identifier", "rp": "EventsApp_Identifier.html", "cl": 9, "ucl": 3, "cal": 12, "tl": 37, "cb": 2, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Adapters.DataAdapter<T>", "rp": "EventsApp_DataAdapter_1.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 32, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "rp": "EventsApp_DataBaseAdapter_1.html", "cl": 265, "ucl": 0, "cal": 265, "tl": 360, "cb": 73, "tb": 74, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Attributes.Identifier", "rp": "EventsApp_Identifier.html", "cl": 12, "ucl": 0, "cal": 12, "tl": 37, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Attributes.TableAttribute", "rp": "EventsApp_TableAttribute.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 22, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Entities.AdminInfo", "rp": "EventsApp_AdminInfo.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 296, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Entities.DonationInfo", "rp": "EventsApp_DonationInfo.html", "cl": 18, "ucl": 0, "cal": 18, "tl": 296, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
@@ -243,32 +233,16 @@ var assemblies = [
       { "name": "EventsApp.Logic.Entities.ReviewInfo", "rp": "EventsApp_ReviewInfo.html", "cl": 12, "ucl": 0, "cal": 12, "tl": 296, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Entities.UserEventRelationInfo", "rp": "EventsApp_UserEventRelationInfo.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 296, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Entities.UserInfo", "rp": "EventsApp_UserInfo.html", "cl": 20, "ucl": 0, "cal": 20, "tl": 296, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Extensions.StructExtensions", "rp": "EventsApp_StructExtensions.html", "cl": 17, "ucl": 17, "cal": 34, "tl": 65, "cb": 5, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.AppDataInfo", "rp": "EventsApp_AppDataInfo.html", "cl": 6, "ucl": 11, "cal": 17, "tl": 45, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Extensions.StructExtensions", "rp": "EventsApp_StructExtensions.html", "cl": 18, "ucl": 0, "cal": 18, "tl": 43, "cb": 5, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.AppDataInfo", "rp": "EventsApp_AppDataInfo.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "EventsApp.Logic.Managers.AppStateManager", "rp": "EventsApp_AppStateManager.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 15, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.DonationsManager", "rp": "EventsApp_DonationsManager.html", "cl": 36, "ucl": 18, "cal": 54, "tl": 91, "cb": 4, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.Dummy", "rp": "EventsApp_Dummy.html", "cl": 0, "ucl": 75, "cal": 75, "tl": 118, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.EventsManager", "rp": "EventsApp_EventsManager.html", "cl": 100, "ucl": 97, "cal": 197, "tl": 298, "cb": 14, "tb": 40, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.ManagersInitializer", "rp": "EventsApp_ManagersInitializer.html", "cl": 22, "ucl": 118, "cal": 140, "tl": 214, "cb": 3, "tb": 30, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.ReportsManager", "rp": "EventsApp_ReportsManager.html", "cl": 40, "ucl": 24, "cal": 64, "tl": 105, "cb": 5, "tb": 18, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.ReviewsManager", "rp": "EventsApp_ReviewsManager.html", "cl": 37, "ucl": 18, "cal": 55, "tl": 95, "cb": 4, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.Managers.UsersManager", "rp": "EventsApp_UsersManager.html", "cl": 59, "ucl": 21, "cal": 80, "tl": 150, "cb": 6, "tb": 16, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Logic.ViewEntities.EventCard", "rp": "EventsApp_EventCard.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 39, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.MainPage", "rp": "EventsApp_MainPage.html", "cl": 0, "ucl": 113, "cal": 113, "tl": 246, "cb": 0, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.MainPageOld", "rp": "EventsApp_MainPageOld.html", "cl": 0, "ucl": 31, "cal": 31, "tl": 83, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.MauiProgram", "rp": "EventsApp_MauiProgram.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Model_View.Entities.Event", "rp": "EventsApp_Event.html", "cl": 0, "ucl": 74, "cal": 74, "tl": 142, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.Model_View.Entities.UserView", "rp": "EventsApp_UserView.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 16, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.OrganizerInvitePage", "rp": "EventsApp_OrganizerInvitePage.html", "cl": 0, "ucl": 21, "cal": 21, "tl": 82, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.RatingPage", "rp": "EventsApp_RatingPage.html", "cl": 0, "ucl": 32, "cal": 32, "tl": 71, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.ReportPage", "rp": "EventsApp_ReportPage.html", "cl": 0, "ucl": 44, "cal": 44, "tl": 122, "cb": 0, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.ReportsPage", "rp": "EventsApp_ReportsPage.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 75, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.ReviewsMockData", "rp": "EventsApp_ReviewsMockData.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.ReviewsPage", "rp": "EventsApp_ReviewsPage.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 75, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.User", "rp": "EventsApp_User.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.UserSharePage", "rp": "EventsApp_UserSharePage.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 72, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "EventsApp.ViewReports", "rp": "EventsApp_ViewReports.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "MainPageModelView", "rp": "EventsApp_MainPageModelView.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.DonationsManager", "rp": "EventsApp_DonationsManager.html", "cl": 58, "ucl": 0, "cal": 58, "tl": 97, "cb": 12, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.Dummy", "rp": "EventsApp_Dummy.html", "cl": 72, "ucl": 0, "cal": 72, "tl": 113, "cb": 8, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.EventsManager", "rp": "EventsApp_EventsManager.html", "cl": 196, "ucl": 0, "cal": 196, "tl": 296, "cb": 39, "tb": 40, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.ManagersInitializer", "rp": "EventsApp_ManagersInitializer.html", "cl": 90, "ucl": 16, "cal": 106, "tl": 158, "cb": 26, "tb": 30, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.ReportsManager", "rp": "EventsApp_ReportsManager.html", "cl": 64, "ucl": 0, "cal": 64, "tl": 105, "cb": 17, "tb": 18, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.ReviewsManager", "rp": "EventsApp_ReviewsManager.html", "cl": 55, "ucl": 0, "cal": 55, "tl": 95, "cb": 12, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "EventsApp.Logic.Managers.UsersManager", "rp": "EventsApp_UsersManager.html", "cl": 83, "ucl": 2, "cal": 85, "tl": 157, "cb": 14, "tb": 16, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -283,136 +257,22 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.ManagersInitializer", "reportPath": "EventsApp_ManagersInitializer.html", "methodName": "SetupDB(System.Boolean,System.Boolean,System.Boolean)", "methodShortName": "SetupDB(...)", "fileIndex": 0, "line": 48,
+    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "reportPath": "EventsApp_DataBaseAdapter_1.html", "methodName": "Get(EventsApp.Logic.Attributes.Identifier)", "methodShortName": "Get(...)", "fileIndex": 0, "line": 123,
     "metrics": [
-      { "value": 296.23, "exceeded": true },
-      { "value": 18, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.CSVAdapter<T>", "reportPath": "EventsApp_CSVAdapter_1.html", "methodName": "GetAll()", "methodShortName": "GetAll()", "fileIndex": 0, "line": 102,
-    "metrics": [
-      { "value": 210, "exceeded": true },
-      { "value": 14, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.MainPage", "reportPath": "EventsApp_MainPage.html", "methodName": "GetEvents(System.String)", "methodShortName": "GetEvents(...)", "fileIndex": 0, "line": 27,
-    "metrics": [
-      { "value": 156, "exceeded": true },
-      { "value": 12, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.ReportPage", "reportPath": "EventsApp_ReportPage.html", "methodName": "GetFirstReportType()", "methodShortName": "GetFirstReportType()", "fileIndex": 1, "line": 29,
-    "metrics": [
-      { "value": 156, "exceeded": true },
-      { "value": 12, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "reportPath": "EventsApp_DataBaseAdapter_1.html", "methodName": "GetAll()", "methodShortName": "GetAll()", "fileIndex": 0, "line": 195,
-    "metrics": [
-      { "value": 137.43, "exceeded": true },
-      { "value": 18, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "reportPath": "EventsApp_DataBaseAdapter_1.html", "methodName": "Get(EventsApp.Logic.Attributes.Identifier)", "methodShortName": "Get(...)", "fileIndex": 0, "line": 125,
-    "metrics": [
-      { "value": 129.44, "exceeded": true },
+      { "value": 20, "exceeded": true },
       { "value": 20, "exceeded": false },
     ]},
   {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.ManagersInitializer", "reportPath": "EventsApp_ManagersInitializer.html", "methodName": "GetFieldType(System.Type)", "methodShortName": "GetFieldType(...)", "fileIndex": 0, "line": 187,
+    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.DataBaseAdapter<T>", "reportPath": "EventsApp_DataBaseAdapter_1.html", "methodName": "GetAll()", "methodShortName": "GetAll()", "fileIndex": 0, "line": 192,
     "metrics": [
-      { "value": 110, "exceeded": true },
-      { "value": 10, "exceeded": false },
+      { "value": 18, "exceeded": true },
+      { "value": 18, "exceeded": false },
     ]},
   {
-    "assembly": "EventsApp", "class": "EventsApp.AddOrEditPage", "reportPath": "EventsApp_AddOrEditPage.html", "methodName": "OnItemSelected(System.Object,Microsoft.Maui.Controls.SelectedItemChangedEventArgs)", "methodShortName": "OnItemSelected(...)", "fileIndex": 0, "line": 180,
+    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.ManagersInitializer", "reportPath": "EventsApp_ManagersInitializer.html", "methodName": "SetupDB(System.Boolean,System.Boolean,System.Boolean)", "methodShortName": "SetupDB(...)", "fileIndex": 0, "line": 41,
     "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.CSVAdapter<T>", "reportPath": "EventsApp_CSVAdapter_1.html", "methodName": "Delete(EventsApp.Logic.Attributes.Identifier)", "methodShortName": "Delete(...)", "fileIndex": 0, "line": 62,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.EventsManager", "reportPath": "EventsApp_EventsManager.html", "methodName": "GetInterestedUsers(System.Guid)", "methodShortName": "GetInterestedUsers(...)", "fileIndex": 0, "line": 137,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.EventsManager", "reportPath": "EventsApp_EventsManager.html", "methodName": "GetGoingUsers(System.Guid)", "methodShortName": "GetGoingUsers(...)", "fileIndex": 0, "line": 154,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.BuyTicketAndDonatePage", "reportPath": "EventsApp_BuyTicketAndDonatePage.html", "methodName": "PayButton_Clicked(System.Object,System.EventArgs)", "methodShortName": "PayButton_Clicked(...)", "fileIndex": 0, "line": 45,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.EventPageUser", "reportPath": "EventsApp_EventPageUser.html", "methodName": "BuyTicketButton_Clicked(System.Object,System.EventArgs)", "methodShortName": "BuyTicketButton_Clicked(...)", "fileIndex": 0, "line": 107,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.CSVAdapter<T>", "reportPath": "EventsApp_CSVAdapter_1.html", "methodName": "Contains(EventsApp.Logic.Attributes.Identifier)", "methodShortName": "Contains(...)", "fileIndex": 0, "line": 48,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.CSVAdapter<T>", "reportPath": "EventsApp_CSVAdapter_1.html", "methodName": "Get(EventsApp.Logic.Attributes.Identifier)", "methodShortName": "Get(...)", "fileIndex": 0, "line": 87,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Adapters.CSVAdapter<T>", "reportPath": "EventsApp_CSVAdapter_1.html", "methodName": "WriteToCSV(System.Collections.Generic.List`1<T>)", "methodShortName": "WriteToCSV(...)", "fileIndex": 0, "line": 169,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Extensions.StructExtensions", "reportPath": "EventsApp_StructExtensions.html", "methodName": "GetIdentifier(System.ValueType)", "methodShortName": "GetIdentifier(...)", "fileIndex": 0, "line": 13,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.Dummy", "reportPath": "EventsApp_Dummy.html", "methodName": "PopulateStatuses()", "methodShortName": "PopulateStatuses()", "fileIndex": 0, "line": 55,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Model_View.Entities.Event", "reportPath": "EventsApp_Event.html", "methodName": "UpdateInterestedStatus()", "methodShortName": "UpdateInterestedStatus()", "fileIndex": 0, "line": 123,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.RatingPage", "reportPath": "EventsApp_RatingPage.html", "methodName": "OnStarClicked(System.Object,System.EventArgs)", "methodShortName": "OnStarClicked(...)", "fileIndex": 1, "line": 31,
-    "metrics": [
-      { "value": 20, "exceeded": true },
-      { "value": 4, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.EventsManager", "reportPath": "EventsApp_EventsManager.html", "methodName": "FilterEvents(EventsApp.Logic.Managers.EventsManager/EventFilter)", "methodShortName": "FilterEvents(...)", "fileIndex": 0, "line": 96,
-    "metrics": [
-      { "value": 18.93, "exceeded": true },
-      { "value": 12, "exceeded": false },
-    ]},
-  {
-    "assembly": "EventsApp", "class": "EventsApp.Logic.Managers.ReportsManager", "reportPath": "EventsApp_ReportsManager.html", "methodName": "RemoveAllReportsForEventAndUser(System.Guid,System.Guid)", "methodShortName": "RemoveAllReportsForEventAndUser(...)", "fileIndex": 0, "line": 95,
-    "metrics": [
-      { "value": 16.67, "exceeded": true },
-      { "value": 6, "exceeded": false },
+      { "value": 17.13, "exceeded": true },
+      { "value": 16, "exceeded": false },
     ]},
 ];
 

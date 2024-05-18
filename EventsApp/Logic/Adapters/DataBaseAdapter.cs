@@ -38,6 +38,7 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error adding event to database");
                 }
             }
         }
@@ -56,12 +57,9 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error clearing database");
                 }
             }
-        }
-
-        public override void Connect()
-        {
         }
 
         public override bool Contains(Identifier id)
@@ -88,10 +86,9 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error checking if item exists in database");
                 }
             }
-
-            return false;
         }
 
         public override void Delete(Identifier id)
@@ -117,6 +114,7 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error deleting item from database");
                 }
             }
         }
@@ -173,22 +171,21 @@
                             {
                                 property.SetValueDirect(reference, float.Parse(reader[property.Name].ToString()));
                             }
-                            else
-                            {
-                                property.SetValueDirect(reference, reader[property.Name]);
-                            }
                         }
 
                         return instance;
+                    }
+                    else
+                    {
+                        return default(T);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error getting item from database");
                 }
             }
-
-            return default;
         }
 
         public override List<T> GetAll()
@@ -237,10 +234,6 @@
                             {
                                 property.SetValueDirect(reference, float.Parse(reader[property.Name].ToString()));
                             }
-                            else
-                            {
-                                property.SetValueDirect(reference, reader[property.Name]);
-                            }
                         }
 
                         list.Add(instance);
@@ -249,9 +242,9 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error getting all items from database");
                 }
             }
-
             return list;
         }
 
@@ -307,6 +300,7 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Error updating item in database");
                 }
             }
         }
